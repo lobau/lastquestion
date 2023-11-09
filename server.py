@@ -1,3 +1,7 @@
+# To generate a key
+# openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
+
+
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import ssl
 from pathlib import Path
