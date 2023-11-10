@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MR.js</title>
+    <meta name="description" content="MR.js example">
+    <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/build.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: none;
+            border-collapse: collapse;
+        }
+
+        html {
+            overflow: hidden;
+            overscroll-behavior: none;
+        }
+
+        body {
+            position: fixed;
+        }
+
+        mr-text {
+            margin: 20px;
+            font-size: 24px;
+        }
+
+        .title {
+            font-size: 5vw;
+            line-height: 100%;
+            color: rgba(24, 24, 24, 0.75);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        mr-app * {
+            display: block;
+        }
+
+        mr-container {
+            background-color: white;
+            border-radius: 2%;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        mr-row {
+            height: 100%;
+            width: 100%;
+        }
+
+        mr-column {
+            height: 100%;
+        }
+
+        .main {
+            background-color: var(--color-paper);
+            border-radius: 2%;
+            padding: 10px;
+            max-width: 80%;
+            margin: auto;
+        }
+
+        .logo {
+            scale: 0.06;
+            z-index: 50;
+        }
+    </style>
+
+</head>
+
+<body>
+    <mr-app camera="camera: orthographic" layers="0 1 2 3">
+        <mr-surface>
+            <mr-container>
+                <mr-column class="main">
+                    <mr-text class="title">The Last Question</mr-text>
+                    <mr-text class="author">by Isaac Asimov</mr-text>
+                    <mr-text>
+<p>This is Leo testing mr.js</p>
+
+helo helo 
+
+
+What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+ and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+<mr-model class="logo" height="0.1" layer="2" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;" src="./assets/box.stl" rotation="125 7 30" zoffset="1" scale="0.001">
+<mr-material> 
+    <mr-texture src="./assets/images/texture.jpg"></mr-texture></mr-material>
+
+    <mr-geometry src="./assets/box.stl"></mr-geometry>
+
+</mr-model>
+
+
+ What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+ and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+ 
+ What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+ and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+ <mr-sky layer="2"></mr-sky>
+
+                    </mr-text>
+
+                    <mr-text>
+
+                    </mr-text>
+                </mr-column>
+            </mr-container>
+        </mr-surface>
+
+        <mr-skybox layer="2"></mr-skybox>
+
+       
+
+        <mr-light color="hsl(30, 100%, 50%)" intensity="10" position="0.5 2 5"></mr-light>
+    </mr-app>
+</body>
+
+<script type="module">
+    class Skybox extends Entity {
+        constructor() {
+            super()
+            this.geometry = new THREE.SphereGeometry(2, 32, 16);
+            this.material = new THREE.MeshBasicMaterial({
+                color: 0xff0000
+            });
+            this.object3D = new THREE.Mesh(this.geometry, this.material);
+        }
+    }
+    customElements.define('mr-skybox', Skybox)
+</script>
+
+</html>
+
+<script type="module">
+class Sky extends Entity {
+    constructor() {
+        super();
+        this.geometry = new THREE.SphereGeometry(2,32,16);
+
+        // Create a basic material without specifying color
+        this.material = new THREE.MeshBasicMaterial();
+
+        // Load the image texture
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load("./assets/images/image.jpg");
+
+        // Apply the texture to the material's map property
+        this.material.map = texture; 
+
+        // Update the material to reflect changes
+        this.material.needsUpdate = true;
+
+        this.object3D = new THREE.Mesh(this.geometry, this.material);
+    }
+}
+customElements.define('mr-sky', Sky)
+</script>
+
+<!-- <script type="module">
+class TextObj extends Entity{
+    constructor (){
+        super();
+        this.geometry = new THREE.Mesh
+
+    }
+}
+
+</script> -->

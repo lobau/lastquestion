@@ -65,7 +65,7 @@
         }
 
         .logo {
-            scale: 0.003;
+            scale: 0.06;
             z-index: 50;
         }
     </style>
@@ -114,7 +114,7 @@ Lupov cocked his head sideways. He had a trick of doing that when he wanted to b
 "That's not forever."
                     </mr-text>
 
-                    <mr-model class="logo" height="0.1" layer="2" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;" src="./assets/logo.stl" rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
+                    <mr-model class="logo" height="0.1" layer="2" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;" src="./assets/box.stl" rotation="125 7 30" zoffset="1" scale="0.001">
                     </mr-model>
 
                     <mr-text>
@@ -501,10 +501,9 @@ And there was light --
     class Skybox extends Entity {
         constructor() {
             super()
-            this.geometry = new THREE.SphereGeometry(20, 32, 16);
+            this.geometry = new THREE.SphereGeometry(2, 32, 16);
             this.material = new THREE.MeshBasicMaterial({
-                color: 0xff0000,
-                side: 2
+                color: 0xff0000
             });
             this.object3D = new THREE.Mesh(this.geometry, this.material);
         }

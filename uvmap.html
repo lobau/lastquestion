@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texture Mapped 3D Model</title>
+    <script type="module">
+        import * as THREE from 'https://cdn.skypack.dev/three@0.128.0/build/three.module.js';
+
+        class TexturedModel extends THREE.Group {
+            constructor() {
+                super();
+
+                // Load STL Model
+                const loader = new THREE.STLLoader();
+                loader.load('./assets/box.stl', (geometry) => {
+                    // Create a mesh from the geometry
+                    const mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial());
+                    
+                    // Set up UV Mapping
+                    geometry.computeBoundingBox();
+                    const max = geometry.boundingBox.max, min = geometry.boundingBox.min;
+                    const offset = new THREE.Vector2(0 - min.x, 0 - min.y);
+                    const range = new THREE.Vector2(max.x - min.x, max.y - min.y);
+                    
+                    geometry.faceVertexUvs[0] = geometry.faces.map((face) => {
+                        const v1 = geometry.vertices[face.a], v2 = geometry.vertices[face.b], v3 = geometry.vertices[face.c];
+                        return [
+                            new THREE.Vector2((v1.x + offset.x) / range.x, (v1.y + offset.y) / range.y),
+                            new THREE.Vector2((v2.x + offset.x) / range.x, (v2.y + offset.y) / range.y),
+                            new THREE.Vector2((v3.x + offset.x) / range.x, (v3.y + offset.y) / range.y),
+                        ];
+                    });
+
+                    mesh.material.map = new THREE.TextureLoader().load('./assets/images/image.jpg');
+                    mesh.material.needsUpdate = true;
+
+                    // Add the mesh to the group
+                    this.add(mesh);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create a scene
+            const scene = new THREE.Scene();
+
+            // Create a camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Create a renderer
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Create and add the textured model to the scene
+            const texturedModel = new TexturedModel();
+            scene.add(texturedModel);
+
+            // Set up lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xffffff, 1);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            // Animation loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+
+                // Rotate the textured model
+                texturedModel.rotation.x += 0.01;
+                texturedModel.rotation.y += 0.01;
+
+                // Render the scene
+                renderer.render(scene, camera);
+            };
+
+            animate();
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
