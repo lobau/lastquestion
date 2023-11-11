@@ -491,7 +491,7 @@ And there was light --
             </mr-container>
         </mr-surface>
 
-        <mr-skybox layer="2"></mr-skybox>
+        <mr-skybox></mr-skybox>
 
         <mr-light color="hsl(30, 100%, 50%)" intensity="10" position="0.5 2 5"></mr-light>
     </mr-app>
@@ -501,9 +501,12 @@ And there was light --
     class Skybox extends Entity {
         constructor() {
             super()
-            this.geometry = new THREE.SphereGeometry(2, 32, 16);
+            this.geometry = new THREE.SphereGeometry(5, 32, 16);
             this.material = new THREE.MeshBasicMaterial({
-                color: 0xff0000
+                color: 0x1666D8,
+                side: 1,
+                opacity: 0.5,
+                transparent: true
             });
             this.object3D = new THREE.Mesh(this.geometry, this.material);
         }
