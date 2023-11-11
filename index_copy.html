@@ -96,8 +96,6 @@ It was popularised in the 1960s with the release of Letraset sheets containing L
 <mr-material> 
     <mr-texture src="./assets/images/texture.jpg"></mr-texture></mr-material>
 
-    <mr-geometry src="./assets/sphere_test.stl"></mr-geometry>
-
 </mr-model>
 
 
@@ -115,21 +113,15 @@ Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, wh
 It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
 It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
  and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
- <mr-sky layer="2"></mr-sky>
-
-                    </mr-text>
-
-                    <mr-text>
-
                     </mr-text>
                 </mr-column>
             </mr-container>
         </mr-surface>
 
-        <mr-skybox layer="2"></mr-skybox>
+        <mr-sky></mr-sky>
 
-       
+        <!-- <mr-geometry src="./assets/sphere_test.stl"></mr-geometry> -->
+        <!-- <mr-skybox></mr-skybox> -->
 
         <mr-light color="hsl(30, 100%, 50%)" intensity="10" position="0.5 2 5"></mr-light>
     </mr-app>
@@ -139,9 +131,20 @@ It was popularised in the 1960s with the release of Letraset sheets containing L
     class Skybox extends Entity {
         constructor() {
             super()
+            this.textureLoader = new THREE.TextureLoader();
+            this.texture = this.textureLoader.load("./images/image.jpg");
             this.geometry = new THREE.SphereGeometry(2, 32, 16);
+
+            this.envMap = loader.load('/images/skybox.jpg');
+            this.envMap.mapping = THREE.EquirectangularReflectionMapping;
+            this.envMap.colorSpace = THREE.SRGBColorSpace;
+
             this.material = new THREE.MeshBasicMaterial({
-                color: 0xff0000
+                color: 0xff0000,
+                opacity: 0.5,
+                side: 1,
+                transparent: true,
+                envMap: this.envMap
             });
             this.object3D = new THREE.Mesh(this.geometry, this.material);
         }
@@ -155,17 +158,23 @@ It was popularised in the 1960s with the release of Letraset sheets containing L
 class Sky extends Entity {
     constructor() {
         super();
-        this.geometry = new THREE.SphereGeometry(2,32,16);
-
-        // Create a basic material without specifying color
-        this.material = new THREE.MeshBasicMaterial();
+        this.geometry = new THREE.SphereGeometry(20,32,16);
 
         // Load the image texture
         const textureLoader = new THREE.TextureLoader();
-        const texture = textureLoader.load("./assets/images/image.jpg");
+        const texture = textureLoader.load("./images/skybox.jpg");
 
         // Apply the texture to the material's map property
-        this.material.map = texture; 
+        // Create a basic material without specifying color
+        // this.material = new THREE.MeshBasicMaterial();
+        this.material = new THREE.MeshBasicMaterial({
+                color: 0xdddddd,
+                opacity: 1,
+                side: 1,
+                // transparent: true,
+                map: texture
+            });
+        // this.material.map = texture; 
 
         // Update the material to reflect changes
         this.material.needsUpdate = true;
