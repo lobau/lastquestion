@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MR.js</title>
     <meta name="description" content="MR.js example">
+
     <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/build.js"></script>
     <style>
         * {
@@ -65,15 +67,20 @@
         }
 
         .logo {
-            scale: 0.001;
-            z-index: -2;
+            scale: 0.003;
+            z-index: 120;
+        }
+
+        .other {
+            scale: 0.0003;
+            z-index: 100;
         }
     </style>
 
 </head>
 
 <body>
-    <mr-app camera="camera: orthographic" layers="0 1 2 3">
+    <mr-app debug="true" camera="camera: orthographic" layers="0 1 2 3">
         <mr-surface>
             <mr-container>
                 <mr-column class="main">
@@ -86,24 +93,29 @@
 
                         What is Lorem Ipsum?
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                        unknown
                         printer took a galley of type and scrambled it to make a type specimen book.
                         It has survived not only five centuries, but also the leap into electronic typesetting,
                         remaining essentially unchanged.
+                    </mr-text>
 
-                        <mr-model class="logo" height="0.1" layer="2"
-                            comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
-                            src="./assets/logo.stl" rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
-                        </mr-model>
+                    <mr-model class="logo" height="0.1" layer="2"
+                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
+                        src="./assets/logo.stl" rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
+                    </mr-model>
 
+                    <mr-text>
                         It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
                         passages,
                         and more recently with desktop publishing software like Aldus PageMaker including versions of
                         Lorem Ipsum.
+                    </mr-text>
 
-                        <mr-model class="logo" src="./assets/boolean.stl" rotation="125 7 30"
-                            comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"></mr-model>
+                    <mr-model class="other" src="./assets/boolean.stl" position="0 0.5 0.5" rotation="125 7 30"
+                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"></mr-model>
 
+                    <mr-text>
                         What is Lorem Ipsum?
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
