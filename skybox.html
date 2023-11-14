@@ -42,11 +42,25 @@
             display: block;
         }
 
-        mr-container {
+        .mainContainer {
             background-color: white;
             border-radius: 2%;
             height: 100vh;
             width: 100vw;
+        }
+
+        .toolbar {
+            background-color: hotpink;
+            border-radius: 2%;
+            height: 10vh;
+            width: 10vw;
+        }
+
+        .button {
+            text-align: left;
+
+            /* height: 10vh;
+            width: 10vw; */
         }
 
         mr-row {
@@ -82,7 +96,15 @@
 <body>
     <mr-app debug="true" camera="camera: orthographic" layers="0 1 2 3">
         <mr-surface>
-            <mr-container>
+            <!-- <mr-entity comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
+                <mr-model class="logo" height="0.1" layer="2"
+                position="0 0 0.5"
+                comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
+                src="./assets/logo.stl" rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
+                </mr-model>
+            </mr-entity> -->
+
+            <mr-container class="mainContainer">
                 <mr-column class="main">
                     <mr-text class="title">The Last Question</mr-text>
                     <mr-text class="author">by Isaac Asimov</mr-text>
@@ -100,9 +122,13 @@
                         remaining essentially unchanged.
                     </mr-text>
 
-                    <mr-model class="logo" height="0.1" layer="2"
+                    <!-- <mr-model class="logo" height="0.1" layer="2" position="0 0 0.5"
                         comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
                         src="./assets/logo.stl" rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
+                    </mr-model> -->
+
+                    <mr-model class="logo" height="0.1" layer="2" position="0 0 0.5" src="./assets/logo.stl"
+                        rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
                     </mr-model>
 
                     <mr-text>
@@ -112,8 +138,11 @@
                         Lorem Ipsum.
                     </mr-text>
 
-                    <mr-model class="other" src="./assets/boolean.stl" position="0 0.5 0.5" rotation="125 7 30"
-                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"></mr-model>
+                    <!-- <mr-model class="other" src="./assets/boolean.stl" position="0 0.5 0.5" rotation="125 7 30"
+                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"></mr-model> -->
+
+                    <mr-model class="other" src="./assets/boolean.stl" position="0 0.5 0.5"
+                        rotation="125 7 30"></mr-model>
 
                     <mr-text>
                         What is Lorem Ipsum?
@@ -141,6 +170,10 @@
                     </mr-text>
                 </mr-column>
             </mr-container>
+
+            <mr-container position="-0.5 0 0.001" class="toolbar">
+                <mr-text id="debug">test</mr-text>
+            </mr-container>
         </mr-surface>
 
         <mr-sky></mr-sky>
@@ -157,7 +190,8 @@
 
             // Load the image texture
             const textureLoader = new THREE.TextureLoader();
-            const texture = textureLoader.load("./images/skybox.jpg");
+            this.texture1 = textureLoader.load("./images/skybox.jpg");
+            this.texture2 = textureLoader.load("./images/hdri.jpg");
 
             // Apply the texture to the material's map property
             // Create a basic material without specifying color
@@ -166,19 +200,52 @@
                 color: 0xdddddd,
                 opacity: 1,
                 side: 1,
-                // transparent: true,
-                map: texture
+                transparent: true,
+                map: this.texture1
             });
-            // this.material.map = texture; 
 
             // Update the material to reflect changes
             this.material.needsUpdate = true;
 
             this.object3D = new THREE.Mesh(this.geometry, this.material);
+
+            window.onload = () => {
+                this.container = document.querySelector("mr-container");
+                this.container.addEventListener("touch", (event) => {
+    
+                    if(this.container.shuttle.position.y > 0.3) {
+                        this.material.map = this.texture2;
+                        this.material.opacity = 1;
+                    } else {
+                        this.material.map = this.texture1;
+                        this.material.opacity = 1 - this.container.shuttle.position.y;
+                    }
+
+                    const debug = document.querySelector("#debug");
+                    debug.innerText = Math.round(this.container.shuttle.position.y * 100) / 100;
+                })
+            }
         }
     }
     customElements.define('mr-sky', Sky)
 </script>
+
+<!-- <script>
+    window.onload = () => {
+        const container = document.querySelector("mr-container");
+        container.addEventListener("touch", (event) => {
+            // console.log(container.shuttle.position.y);
+            // console.log(container.contentHeight);
+            const sky = document.querySelector("mr-sky");
+            sky.material.opacity = 1 - container.shuttle.position.y;
+            console.log(sky.material.opacity);
+
+            const debug = document.querySelector("#debug");
+            console.log(debug)
+            debug.innerText = sky.material.opacity;
+        })
+    }
+</script> -->
 
 <script src="./scripts/AnimationSystem.js"></script>
 
