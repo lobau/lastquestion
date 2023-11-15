@@ -27,7 +27,8 @@
 
         mr-text {
             margin: 20px;
-            font-size: 24px;
+            font-size: 36px;
+            line-height: 200%;
         }
 
         .title {
@@ -58,9 +59,6 @@
 
         .button {
             text-align: left;
-
-            /* height: 10vh;
-            width: 10vw; */
         }
 
         mr-row {
@@ -106,19 +104,35 @@
 
             <mr-container class="mainContainer">
                 <mr-column class="main">
-                    <mr-text class="title">The Last Question</mr-text>
-                    <mr-text class="author">by Isaac Asimov</mr-text>
-                    <mr-text>
-                        <p>This is Leo testing mr.js</p>
-                        helo helo
+                    <mr-text class="title">I Wandered Lonely as a Cloud</mr-text>
+                    <mr-text class="author">by William Wordsworth</mr-text>
+                    <mr-text>I wandered lonely as a cloud
+That floats on high o'er vales and hills,
+When all at once I saw a crowd,
+A host, of golden daffodils;
+Beside the lake, beneath the trees,
+Fluttering and dancing in the breeze.
 
-                        What is Lorem Ipsum?
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                        unknown
-                        printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged.
+Continuous as the stars that shine
+And twinkle on the milky way,
+They stretched in never-ending line
+Along the margin of a bay:
+Ten thousand saw I at a glance,
+Tossing their heads in sprightly dance.
+
+The waves beside them danced; but they
+Out-did the sparkling waves in glee:
+A poet could not but be gay,
+In such a jocund company:
+I gazed—and gazed—but little thought
+What wealth the show to me had brought:
+
+For oft, when on my couch I lie
+In vacant or in pensive mood,
+They flash upon that inward eye
+Which is the bliss of solitude;
+And then my heart with pleasure fills,
+And dances with the daffodils.
                     </mr-text>
 
                     <!-- <mr-model class="logo" height="0.1" layer="2" position="0 0 0.5"
@@ -126,24 +140,24 @@
                         src="./assets/logo.stl" rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
                     </mr-model> -->
 
-                    <mr-model class="logo" height="0.1" layer="2" position="0 0 0.5" src="./assets/logo.stl"
+                    <!-- <mr-model class="logo" height="0.1" layer="2" position="0 0 0.5" src="./assets/logo.stl"
                         rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
-                    </mr-model>
+                    </mr-model> -->
 
-                    <mr-text>
+                    <!-- <mr-text>
                         It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
                         passages,
                         and more recently with desktop publishing software like Aldus PageMaker including versions of
                         Lorem Ipsum.
-                    </mr-text>
+                    </mr-text> -->
 
                     <!-- <mr-model class="other" src="./assets/boolean.stl" position="0 0.5 0.5" rotation="125 7 30"
                         comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"></mr-model> -->
 
-                    <mr-model class="other" src="./assets/boolean.stl" position="0 0.5 0.5"
-                        rotation="125 7 30"></mr-model>
+                    <!-- <mr-model class="other" src="./assets/boolean.stl" position="0 0.5 0.5"
+                        rotation="125 7 30"></mr-model> -->
 
-                    <mr-text>
+                    <!-- <mr-text>
                         What is Lorem Ipsum?
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
@@ -166,7 +180,7 @@
                         passages,
                         and more recently with desktop publishing software like Aldus PageMaker including versions of
                         Lorem Ipsum.
-                    </mr-text>
+                    </mr-text> -->
                 </mr-column>
             </mr-container>
 
@@ -189,8 +203,8 @@
 
             // Load the image texture
             const textureLoader = new THREE.TextureLoader();
-            this.texture1 = textureLoader.load("./images/skybox.jpg");
-            this.texture2 = textureLoader.load("./images/hdri.jpg");
+            this.texture1 = textureLoader.load("./skybox/skybox1.jpg");
+            this.texture2 = textureLoader.load("./skybox/skybox2.jpg");
 
             // Apply the texture to the material's map property
             // Create a basic material without specifying color
@@ -214,10 +228,10 @@
 
                     if (this.container.shuttle.position.y > 0.3) {
                         this.material.map = this.texture2;
-                        this.material.opacity = 1;
+                        // this.material.opacity = 1;
                     } else {
                         this.material.map = this.texture1;
-                        this.material.opacity = 1 - this.container.shuttle.position.y;
+                        // this.material.opacity = 1 - this.container.shuttle.position.y;
                     }
 
                     const debug = document.querySelector("#debug");
