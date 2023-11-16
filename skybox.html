@@ -25,6 +25,12 @@
             position: fixed;
         }
 
+        mr-surface {
+            height: 100vh;
+            width: 100vw;
+        }
+
+
         mr-text {
             margin: 20px;
             font-size: 36px;
@@ -78,8 +84,8 @@
             margin: auto;
         }
 
-        .logo {
-            scale: 0.003;
+        .daffodil {
+            scale: 0.03;
             z-index: 120;
         }
 
@@ -92,15 +98,19 @@
 </head>
 
 <body>
-    <mr-app debug="false" camera="camera: orthographic" layers="0 1 2 3">
-        <mr-surface>
-            <!-- <mr-entity comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                <mr-model class="logo" height="0.1" layer="2"
-                position="0 0 0.5"
-                comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
-                src="./assets/logo.stl" rotation="-22.91 17.1887 45.8366" zoffset="0.05" scale="0.001">
+    <mr-app debug="false" camera="camera: perspective" layers="0 1 2 3">
+        <mr-surface fixed="true">
+            <!-- Currently the logo, we could have flowers rotating around at some point -->
+            <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
+                <mr-model class="daffodil" height="0.1" layer="2" position="1 0 0"
+                    comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
+                    src="./assets/daffodil.stl" rotation="0 180 0">
                 </mr-model>
-            </mr-entity> -->
+            </mr-entity>
+
+            <mr-model id="island" layer="2" position="0 -1 -5" src="./assets/island.stl" rotation="-90 0 90"
+                zoffset="0.05" scale="0.001">
+            </mr-model>
 
             <mr-container class="mainContainer">
                 <mr-column class="main">
@@ -119,7 +129,13 @@ They stretched in never-ending line
 Along the margin of a bay:
 Ten thousand saw I at a glance,
 Tossing their heads in sprightly dance.
+                    </mr-text>
 
+                    <mr-model class="daffodil" height="0.1" layer="2" position="0 0 0" src="./assets/daffodil.stl"
+                        rotation="0 90 0">
+                    </mr-model>
+
+                    <mr-text>
 The waves beside them danced; but they
 Out-did the sparkling waves in glee:
 A poet could not but be gay,
@@ -134,6 +150,10 @@ Which is the bliss of solitude;
 And then my heart with pleasure fills,
 And dances with the daffodils.
                     </mr-text>
+
+
+
+
 
                     <!-- <mr-model class="logo" height="0.1" layer="2" position="0 0 0.5"
                         comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
@@ -199,7 +219,7 @@ And dances with the daffodils.
     class Sky extends Entity {
         constructor() {
             super();
-            this.geometry = new THREE.SphereGeometry(20, 32, 16);
+            this.geometry = new THREE.SphereGeometry(16, 32, 16);
 
             // Load the image texture
             const textureLoader = new THREE.TextureLoader();
@@ -225,13 +245,18 @@ And dances with the daffodils.
             window.onload = () => {
                 this.container = document.querySelector("mr-container");
                 this.container.addEventListener("touch", (event) => {
+                    const position = this.container.shuttle.position.y
+
+                    const island = document.querySelector("#island");
+                    island.object3D.position.z = position * 10 - 5;
+                    // island.object3D.scale.setScalar(position);
 
                     if (this.container.shuttle.position.y > 0.3) {
                         this.material.map = this.texture2;
                         // this.material.opacity = 1;
                     } else {
                         this.material.map = this.texture1;
-                        // this.material.opacity = 1 - this.container.shuttle.position.y;
+                        // this.material.o=pacity = 1 - this.container.shuttle.position.y;
                     }
 
                     const debug = document.querySelector("#debug");
