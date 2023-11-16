@@ -80,39 +80,53 @@
                     <mr-text class="title">The Last Question</mr-text>
                     <mr-text class="author">by Isaac Asimov</mr-text>
                     <mr-text>
-<p>This is Leo testing mr.js</p>
+                        <p>This is Leo testing mr.js</p>
 
-helo helo 
-
-
-What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
- and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-<mr-model class="logo" height="0.1" layer="2" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;" src="./assets/sphere_test.stl" rotation="125 7 30" zoffset="1" scale="0.001">
-<mr-material> 
-    <mr-texture src="./assets/images/texture.jpg"></mr-texture></mr-material>
-
-</mr-model>
+                        helo helo
 
 
- What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
- and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        What is Lorem Ipsum?
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged.
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                        passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
 
- 
- What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
- and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        <mr-model class="logo" height="0.1" layer="2"
+                            comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
+                            src="./assets/sphere_test.stl" rotation="125 7 30" zoffset="1" scale="0.001">
+                            <mr-material>
+                                <mr-texture src="./assets/images/texture.jpg"></mr-texture></mr-material>
+
+                        </mr-model>
+
+
+                        What is Lorem Ipsum?
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged.
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                        passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
+
+
+                        What is Lorem Ipsum?
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged.
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                        passages,
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of
+                        Lorem Ipsum.
                     </mr-text>
                 </mr-column>
             </mr-container>
@@ -155,34 +169,34 @@ It was popularised in the 1960s with the release of Letraset sheets containing L
 </html>
 
 <script type="module">
-class Sky extends Entity {
-    constructor() {
-        super();
-        this.geometry = new THREE.SphereGeometry(20,32,16);
+    class Sky extends Entity {
+        constructor() {
+            super();
+            this.geometry = new THREE.SphereGeometry(20, 32, 16);
 
-        // Load the image texture
-        const textureLoader = new THREE.TextureLoader();
-        const texture = textureLoader.load("./images/skybox.jpg");
+            // Load the image texture
+            const textureLoader = new THREE.TextureLoader();
+            const texture = textureLoader.load("./images/skybox.jpg");
 
-        // Apply the texture to the material's map property
-        // Create a basic material without specifying color
-        // this.material = new THREE.MeshBasicMaterial();
-        this.material = new THREE.MeshBasicMaterial({
+            // Apply the texture to the material's map property
+            // Create a basic material without specifying color
+            // this.material = new THREE.MeshBasicMaterial();
+            this.material = new THREE.MeshBasicMaterial({
                 color: 0xdddddd,
                 opacity: 1,
                 side: 1,
                 // transparent: true,
                 map: texture
             });
-        // this.material.map = texture; 
+            // this.material.map = texture; 
 
-        // Update the material to reflect changes
-        this.material.needsUpdate = true;
+            // Update the material to reflect changes
+            this.material.needsUpdate = true;
 
-        this.object3D = new THREE.Mesh(this.geometry, this.material);
+            this.object3D = new THREE.Mesh(this.geometry, this.material);
+        }
     }
-}
-customElements.define('mr-sky', Sky)
+    customElements.define('mr-sky', Sky)
 </script>
 
 <!-- <script type="module">

@@ -9,6 +9,12 @@
 
     <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/build.js"></script>
     <style>
+        @font-face {
+            font-family: 'Hepta Slab';
+            src: url('./fonts/HeptaSlab.ttf') format('truetype');
+            font-weight: 100-900;
+        }
+
         * {
             padding: 0;
             margin: 0;
@@ -42,7 +48,13 @@
             line-height: 100%;
             color: rgba(24, 24, 24, 0.75);
             font-weight: bold;
+            font-family: "Hepta Slab", sans-serif;
             text-align: center;
+            
+        }
+
+        author {
+            font-family: serif;
         }
 
         mr-app * {
@@ -99,7 +111,7 @@
 
 <body>
     <mr-app debug="false" camera="camera: perspective" layers="0 1 2 3">
-        <mr-surface fixed="true" rotation="-30 0 0"  position="0 -0.5 0">
+        <mr-surface fixed="true" rotation="-30 0 0" position="0 -0.5 0">
             <!-- Currently the logo, we could have flowers rotating around at some point -->
             <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                 <mr-model class="daffodil" height="0.1" layer="2" position="1 0 0"
@@ -113,12 +125,12 @@
                     <mr-text class="title">I Wandered Lonely as a Cloud</mr-text>
                     <mr-text class="author">by William Wordsworth</mr-text>
                     <mr-text>
-I wandered lonely as a cloud
-That floats on high o'er vales and hills,
-When all at once I saw a crowd,
-A host, of golden daffodils;
-Beside the lake, beneath the trees,
-Fluttering and dancing in the breeze.
+                        I wandered lonely as a cloud
+                        That floats on high o'er vales and hills,
+                        When all at once I saw a crowd,
+                        A host, of golden daffodils;
+                        Beside the lake, beneath the trees,
+                        Fluttering and dancing in the breeze.
                     </mr-text>
 
                     <mr-model class="daffodil" height="0.1" layer="2" position="0 0 0" src="./assets/daffodil.stl"
@@ -126,12 +138,12 @@ Fluttering and dancing in the breeze.
                     </mr-model>
 
                     <mr-text>
-Continuous as the stars that shine
-And twinkle on the milky way,
-They stretched in never-ending line
-Along the margin of a bay:
-Ten thousand saw I at a glance,
-Tossing their heads in sprightly dance.
+                        Continuous as the stars that shine
+                        And twinkle on the milky way,
+                        They stretched in never-ending line
+                        Along the margin of a bay:
+                        Ten thousand saw I at a glance,
+                        Tossing their heads in sprightly dance.
                     </mr-text>
 
                     <mr-model class="daffodil" height="0.1" layer="2" position="0 0 0" src="./assets/daffodil.stl"
@@ -139,12 +151,12 @@ Tossing their heads in sprightly dance.
                     </mr-model>
 
                     <mr-text>
-The waves beside them danced; but they
-Out-did the sparkling waves in glee:
-A poet could not but be gay,
-In such a jocund company:
-I gazed—and gazed—but little thought
-What wealth the show to me had brought:
+                        The waves beside them danced; but they
+                        Out-did the sparkling waves in glee:
+                        A poet could not but be gay,
+                        In such a jocund company:
+                        I gazed—and gazed—but little thought
+                        What wealth the show to me had brought:
                     </mr-text>
 
                     <mr-model class="daffodil" height="0.1" layer="2" position="0 0 0" src="./assets/daffodil.stl"
@@ -152,12 +164,12 @@ What wealth the show to me had brought:
                     </mr-model>
 
                     <mr-text>
-For oft, when on my couch I lie
-In vacant or in pensive mood,
-They flash upon that inward eye
-Which is the bliss of solitude;
-And then my heart with pleasure fills,
-And dances with the daffodils.
+                        For oft, when on my couch I lie
+                        In vacant or in pensive mood,
+                        They flash upon that inward eye
+                        Which is the bliss of solitude;
+                        And then my heart with pleasure fills,
+                        And dances with the daffodils.
                     </mr-text>
                 </mr-column>
             </mr-container>
@@ -169,9 +181,9 @@ And dances with the daffodils.
 
         <mr-sky></mr-sky>
 
-        <mr-model id="island" layer="2" position="0 -1 -5" src="./assets/island.stl" rotation="-90 0 90"
-                zoffset="0.05" scale="0.001">
-            </mr-model>
+        <mr-model id="island" layer="2" position="0 -1 -5" src="./assets/island.stl" rotation="-90 0 90" zoffset="0.05"
+            scale="0.001">
+        </mr-model>
 
         <mr-light color="hsl(30, 100%, 50%)" intensity="10" position="0.5 2 5"></mr-light>
     </mr-app>
