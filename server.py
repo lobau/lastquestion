@@ -5,7 +5,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import ssl
 from pathlib import Path
 
-port = 8443
+port = 4443
 
 httpd = HTTPServer(("localhost", port), SimpleHTTPRequestHandler)
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
