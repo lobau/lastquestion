@@ -20,6 +20,12 @@
             font-weight: 700;
         }
 
+        /* @font-face {
+            font-family: 'Archia';
+            src: url('./fonts/Archia-Bold.otf') format('opentype');
+            font-weight: 700;
+        } */
+
 
         * {
             padding: 0;
@@ -194,7 +200,7 @@
 
         <mr-light color="hsl(30, 100%, 50%)" intensity="10" position="0.5 2 5"></mr-light>
 
-        <mr-model id="island" layer="2" position="0 -3 -5" src="./assets/island.stl" rotation="-90 0 90" zoffset="0.05"
+        <mr-model id="island" layer="2" position="0 -3 -5" src="./assets/island.glb" rotation="0 90 0" zoffset="0.05"
             scale="0.001">
         </mr-model>
 
@@ -227,11 +233,6 @@
 
             this.object3D = new THREE.Mesh(this.geometry, this.material);
         }
-
-        // connectedCallback() {
-        //     this.goalOpacity = 0;
-        //     console.log(this.goalOpacity);
-        // }
 
         setOpacity(opacity) {
             this.originOpacity = this.material.opacity;
