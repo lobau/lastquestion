@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MR.js</title>
-    <meta name="description" content="MR.js example">
+    <title>I Wandered Lonely as a Cloud</title>
 
     <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/build.js"></script>
     <style>
@@ -133,7 +132,7 @@
 
 <body>
     <mr-app debug="false" camera="camera: perspective" layers="0 1 2 3">
-        <mr-surface fixed="true" rotation="-30 0 0" position="0 -0.5 0">
+        <mr-surface fixed="true">
             <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                 <mr-model class="daffodil" height="0.1" layer="2" position="1 0 0"
                     comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
@@ -141,7 +140,7 @@
                 </mr-model>
             </mr-entity>
 
-            <mr-container class="mainContainer">
+            <mr-container class="mainContainer" rotation="-30 0 0" position="0 -0.5 0">
                 <mr-column class="main">
                     <mr-text class="title">I Wandered</mr-text>
                     <mr-text class="title">Lonely as a Cloud</mr-text>
@@ -205,46 +204,14 @@
         <mr-sky id="sky1" data-texture="./skybox/skybox1.jpg"></mr-sky>
         <mr-sky id="sky2" data-texture="./skybox/skybox2.jpg"></mr-sky>
 
+        <mr-light color="hsl(30, 100%, 50%)" intensity="10" position="0.5 2 5"></mr-light>
+
         <mr-model id="island" layer="2" position="0 -3 -5" src="./assets/island.stl" rotation="-90 0 90" zoffset="0.05"
             scale="0.001">
         </mr-model>
 
     </mr-app>
 </body>
-
-<script>
-window.onload = () => {
-        const container = document.querySelector("mr-container");
-        container.addEventListener("touch", (event) => {
-            const position = container.shuttle.position.y
-
-            const island = document.querySelector("#island");
-            island.object3D.position.z = position * 10 - 5;
-
-            const skybox1 = document.querySelector("#sky1");
-            const skybox2 = document.querySelector("#sky2");
-            // island.object3D.scale.setScalar(position);
-
-            console.log(skybox1)
-
-            if (container.shuttle.position.y > 0.3) {
-                skybox1.material.opacity = 1;
-                skybox2.material.opacity = 0;
-                // this.material.map = this.texture2;
-                
-                // this.material.opacity = 1;
-            } else {
-                skybox1.material.opacity = 0;
-                skybox2.material.opacity = 1;
-                // this.material.map = this.texture1;
-                // this.material.opacity = 1 - this.container.shuttle.position.y;
-            }
-
-            const debug = document.querySelector("#debug");
-            debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
-        })
-    }
-</script>
 
 <script type="module">
     class Sky extends Entity {
@@ -268,14 +235,73 @@ window.onload = () => {
             });
 
             // Update the material to reflect changes
-            this.material.needsUpdate = true;
+            // this.material.needsUpdate = true;
 
             this.object3D = new THREE.Mesh(this.geometry, this.material);
+        }
+
+        // connectedCallback() {
+        //     this.goalOpacity = 0;
+        //     console.log(this.goalOpacity);
+        // }
+
+        setOpacity(opacity) {
+            this.originOpacity = this.material.opacity;
+            this.goalOpacity = opacity;
+            window.requestAnimationFrame(this.opacityLoop.bind(this));
+        }
+
+        opacityLoop() {
+            if (this.goalOpacity > this.originOpacity) {
+                this.material.opacity += 0.005;
+            } else {
+                this.material.opacity -= 0.005;
+            }
+
+            if (Math.abs(this.goalOpacity - this.material.opacity) < 0.02) {
+                this.material.opacity = this.goalOpacity;
+            } else {
+                window.requestAnimationFrame(this.opacityLoop.bind(this));
+            }
         }
     }
     customElements.define('mr-sky', Sky);
 </script>
 
 <script src="./scripts/AnimationSystem.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        console.log("DOM fully loaded and parsed");
+
+        const skybox1 = document.querySelector("#sky1");
+        const skybox2 = document.querySelector("#sky2");
+        skybox1.setOpacity(1);
+        skybox2.setOpacity(0);
+
+        const container = document.querySelector("mr-container");
+        container.addEventListener("touch", (event) => {
+            const position = container.shuttle.position.y
+
+            const island = document.querySelector("#island");
+            island.object3D.position.z = position * 10 - 5;
+            // island.object3D.scale.setScalar(position);
+
+            if (container.shuttle.position.y < 0.3) {
+                skybox1.setOpacity(1);
+                skybox2.setOpacity(0);
+            } else if(container.shuttle.position.y < 0.6) {
+                skybox1.setOpacity(0);
+                skybox2.setOpacity(1);
+            } else {
+                skybox1.setOpacity(0);
+                skybox2.setOpacity(0);
+            }
+
+            const debug = document.querySelector("#debug");
+            debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
+        })
+    });
+</script>
 
 </html>
