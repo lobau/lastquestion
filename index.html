@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>I Wandered Lonely as a Cloud</title>
 
-    <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/build.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/mr.js"></script>
     <style>
         @font-face {
             font-family: 'Hepta Slab';
@@ -25,6 +25,18 @@
             src: url('./fonts/Archia-Bold.otf') format('opentype');
             font-weight: 700;
         } */
+
+        @font-face {
+            font-family: 'Zilla Slab';
+            src: url('./fonts/ZillaSlab-Medium.ttf') format('truetype');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Zilla Slab';
+            src: url('./fonts/ZillaSlab-Bold.ttf') format('truetype');
+            font-weight: 700;
+        }
 
 
         * {
@@ -48,98 +60,99 @@
             width: 100vw;
         }
 
-
-        mr-text {
-            margin: 20px;
-            font-size: 36px;
-            line-height: 200%;
-            font-family: "Hepta Slab";
-            font-weight: 400;
-            color: white;
-        }
-
-        .title {
-            font-size: 5vw;
-            line-height: 100%;
-            /* color: rgba(24, 24, 24, 0.75); */
-            color: white;
-            font-weight: 900;
-            text-align: center;
-
-        }
-
-        author {
-            font-family: serif;
-        }
-
         mr-app * {
             display: block;
-        }
-
-        .mainContainer {
-            /* background-color: rgba(255, 255, 255, 0.5); */
-            border-radius: 2%;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .toolbar {
-            background-color: hotpink;
-            border-radius: 2%;
-            height: 10vh;
-            width: 10vw;
-        }
-
-        .button {
-            text-align: left;
-        }
-
-        mr-row {
-            height: 100%;
-            width: 100%;
         }
 
         mr-column {
             height: 100%;
         }
 
-        .main {
-            background-color: var(--color-paper);
-            border-radius: 2%;
-            padding: 10px;
-            max-width: 80%;
-            margin: auto;
+        .mainContainer {
+            background-color: white;
+            opacity: 1;
+            border-radius: 10px;
+            height: 500px;
+            width: 720px;
+        }
+
+        .title {
+            font-size: 48px;
+            line-height: 100%;
+            color: black;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .author {
+            font-size: 18px;
+            line-height: 100%;
+            color: black;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .paragraph {
+            color: white;
+            font-size: 24px;
+            line-height: 200%;
+            font-family: "Zilla Slab";
+            font-weight: 400;
+            color: black;
+            /* width: 100%; */
+            margin-top: 40px;
+            /* margin-bottom: 20px; */
+            text-align: center;
+        }
+
+        .toolbar {
+            background-color: hotpink;
+            border-radius: 1%;
+            height: 80px;
+            width: 150px;
+        }
+
+        .button {
+            text-align: left;
         }
 
         .daffodil {
-            scale: 0.03;
-            z-index: 120;
+            scale: 0.01;
+            z-index: 0;
         }
 
-        .other {
-            scale: 0.0003;
-            z-index: 100;
+        .logo {
+            scale: 0.001;
+            z-index: 10;
+            height: 100px;
+        }
+
+        #debug {
+            font-size: 36px;
+            color: red;
         }
     </style>
 
 </head>
 
 <body>
-    <mr-app debug="false" camera="camera: perspective" layers="0 1 2 3">
+    <mr-app debug="false" camera="camera: perspective">
         <mr-surface fixed="true">
             <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                <mr-model class="daffodil" height="0.1" layer="2" position="1 0 0"
+                <mr-model class="daffodil" height="0.1" position="1 0 0"
                     comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
                     src="./assets/daffodil.stl" rotation="0 180 0">
                 </mr-model>
             </mr-entity>
 
-            <mr-container class="mainContainer" rotation="-20 0 0" position="0 0 0">
-                <mr-column class="main">
-                    <mr-text class="title">I Wandered</mr-text>
-                    <mr-text class="title">Lonely as a Cloud</mr-text>
+            <mr-container class="mainContainer" rotation="-20 0 0" position="0 -0.1 0">
+                <mr-column>
+                    <mr-text class="title">I Wandered
+                        Lonely as a Cloud</mr-text>
                     <mr-text class="author">by William Wordsworth</mr-text>
-                    <mr-text>
+                    <mr-text class="paragraph">
                         I wandered lonely as a cloud
                         That floats on high o'er vales and hills,
                         When all at once I saw a crowd,
@@ -148,11 +161,17 @@
                         Fluttering and dancing in the breeze.
                     </mr-text>
 
-                    <mr-model class="daffodil" height="0.1" layer="2" position="0 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0">
-                    </mr-model>
+                    <mr-entity rotation="90 0 0"
+                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
+                        <mr-model class="logo" src="./assets/logo.stl"></mr-model>
+                    </mr-entity>
 
-                    <mr-text>
+                    <!-- <mr-img class="inlineImage" src="./images/placeholder.jpg"></mr-img> -->
+
+                    <!-- <mr-model class="daffodil" position="0 0 -20" src="./assets/daffodil.stl"
+                        rotation="0 90 0"></mr-model> -->
+
+                    <mr-text class="paragraph">
                         Continuous as the stars that shine
                         And twinkle on the milky way,
                         They stretched in never-ending line
@@ -161,11 +180,11 @@
                         Tossing their heads in sprightly dance.
                     </mr-text>
 
-                    <mr-model class="daffodil" height="0.1" layer="2" position="0 0 0" src="./assets/daffodil.stl"
+                    <mr-model class="daffodil" height="0.1" position="0 0 0" src="./assets/daffodil.stl"
                         rotation="0 90 0">
                     </mr-model>
 
-                    <mr-text>
+                    <mr-text class="paragraph">
                         The waves beside them danced; but they
                         Out-did the sparkling waves in glee:
                         A poet could not but be gay,
@@ -174,11 +193,11 @@
                         What wealth the show to me had brought:
                     </mr-text>
 
-                    <mr-model class="daffodil" height="0.1" layer="2" position="0 0 0" src="./assets/daffodil.stl"
+                    <mr-model class="daffodil" height="0.1" position="0 0 0" src="./assets/daffodil.stl"
                         rotation="0 90 0">
                     </mr-model>
 
-                    <mr-text>
+                    <mr-text class="paragraph">
                         For oft, when on my couch I lie
                         In vacant or in pensive mood,
                         They flash upon that inward eye
@@ -190,15 +209,16 @@
 
             </mr-container>
 
-            <mr-container position="-0.5 0 0.001" class="toolbar">
-                <mr-text id="debug">test</mr-text>
+            <mr-container position="-0.2 0 0.1" class="toolbar" rotation="-20 0 0">
+                <mr-text id="debug">0</mr-text>
             </mr-container>
         </mr-surface>
 
-        <mr-sky id="sky1" data-texture="./skybox/skybox1.jpg"></mr-sky>
+        <mr-sky id="sky0" data-texture="./skybox/black.jpg"></mr-sky>
+        <mr-sky id="sky1" data-texture="./skybox/1700261476238.jpg"></mr-sky>
         <mr-sky id="sky2" data-texture="./skybox/skybox2.jpg"></mr-sky>
 
-        <mr-light color="hsl(30, 100%, 50%)" intensity="10" position="0.5 2 5"></mr-light>
+        <mr-light color="white" intensity="5" position="0 10 0"></mr-light>
 
         <mr-model id="island" layer="2" position="0 -3 -5" src="./assets/island.glb" rotation="0 90 0" zoffset="0.05"
             scale="0.001">
@@ -213,23 +233,19 @@
             super();
             this.geometry = new THREE.SphereGeometry(16, 32, 16);
 
-            // Load the image texture
             const textureLoader = new THREE.TextureLoader();
             this.texture = textureLoader.load(this.dataset.texture);
-
-            // Apply the texture to the material's map property
-            // Create a basic material without specifying color
-            // this.material = new THREE.MeshBasicMaterial();
             this.material = new THREE.MeshBasicMaterial({
                 color: 0xdddddd,
                 opacity: 0,
                 side: 1,
                 transparent: true,
-                map: this.texture
+                map: this.texture,
+                needsUpdate: true
             });
 
-            // Update the material to reflect changes
-            // this.material.needsUpdate = true;
+            this.originOpacity = 0;
+            this.goalOpacity = 0;
 
             this.object3D = new THREE.Mesh(this.geometry, this.material);
         }
@@ -237,24 +253,37 @@
         setOpacity(opacity) {
             this.originOpacity = this.material.opacity;
             this.goalOpacity = opacity;
-            window.requestAnimationFrame(this.opacityLoop.bind(this));
         }
 
         opacityLoop() {
-            if (this.goalOpacity > this.originOpacity) {
-                this.material.opacity += 0.005;
+            if (Math.abs(this.goalOpacity - this.material.opacity) > 0.02) {
+                if (this.goalOpacity > this.originOpacity) {
+                    this.material.opacity += 0.05;
+                } else {
+                    this.material.opacity -= 0.05;
+                }
             } else {
-                this.material.opacity -= 0.005;
+                this.material.opacity = this.goalOpacity;
             }
 
-            if (Math.abs(this.goalOpacity - this.material.opacity) < 0.02) {
-                this.material.opacity = this.goalOpacity;
-            } else {
-                window.requestAnimationFrame(this.opacityLoop.bind(this));
-            }
         }
     }
     customElements.define('mr-sky', Sky);
+
+    class FadeSystem extends System {
+        constructor() {
+            super();
+            this.skyboxes = document.querySelectorAll("mr-sky");
+
+        }
+        update(deltaTime, frame) {
+            this.skyboxes.forEach(skybox => {
+                skybox.opacityLoop()
+            });
+        }
+    }
+
+    var fade = new FadeSystem();
 </script>
 
 <script src="./scripts/AnimationSystem.js"></script>
@@ -263,12 +292,18 @@
     document.addEventListener("DOMContentLoaded", (event) => {
         console.log("DOM fully loaded and parsed");
 
+        const skybox0 = document.querySelector("#sky0");
         const skybox1 = document.querySelector("#sky1");
         const skybox2 = document.querySelector("#sky2");
-        skybox1.setOpacity(1);
+        skybox0.setOpacity(0);
+        skybox1.setOpacity(0);
         skybox2.setOpacity(0);
 
         const container = document.querySelector("mr-container");
+        let textureLoader = new THREE.TextureLoader();
+        container.background.material.opacity = 0.5;
+
+
         container.addEventListener("touch", (event) => {
             const position = container.shuttle.position.y
 
@@ -276,13 +311,24 @@
             island.object3D.position.z = position * 10 - 5;
             // island.object3D.scale.setScalar(position);
 
-            if (container.shuttle.position.y < 0.3) {
+            if (container.shuttle.position.y < 0.05) {
+                skybox0.setOpacity(0);
+                skybox1.setOpacity(0);
+                skybox2.setOpacity(0);
+            } else if (container.shuttle.position.y < 0.1) {
+                skybox0.setOpacity(0.5);
+                skybox1.setOpacity(0);
+                skybox2.setOpacity(0);
+            } else if (container.shuttle.position.y < 0.3) {
+                skybox0.setOpacity(0.5);
                 skybox1.setOpacity(1);
                 skybox2.setOpacity(0);
-            } else if(container.shuttle.position.y < 0.6) {
-                skybox1.setOpacity(0);
+            } else if (container.shuttle.position.y < 0.6) {
+                skybox0.setOpacity(0.5);
+                skybox1.setOpacity(1);
                 skybox2.setOpacity(1);
             } else {
+                skybox0.setOpacity(0);
                 skybox1.setOpacity(0);
                 skybox2.setOpacity(0);
             }
