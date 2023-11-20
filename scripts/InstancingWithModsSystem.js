@@ -7,7 +7,7 @@ class InstancingWithModsSystem extends System {
 
         const this.instanceCount = 5;
 
-        // DOD arrays
+        // DataOrientedDesign arrays
         let this.positions = null;
         let this.scales = null;
         let this.rotations = null;
@@ -80,8 +80,8 @@ class InstancingWithModsSystem extends System {
             const mesh = new THREE.Mesh(instancedGeometry, material);
             mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
             this.meshes.push(mesh);
-            // todo - how to grab this below part? THREE.add..
-            scene.add(mesh);
+            // todo - will i be able to update these in the animate loop after?
+            entity.object3D.add(mesh);
         }
     }
 
@@ -94,15 +94,10 @@ class InstancingWithModsSystem extends System {
     }
 
     animate = (entity) => {
-        // if (Math.abs(entity.animation.speed) < Math.abs(entity.animation.maxspeed)) {
-        //     entity.animation.speed += parseFloat(entity.animation.acceleration)
-        // }
-        // entity.object3D.rotation.z += entity.animation.speed;
-
         // todo - how to let one entity have more than one object3D in it??
         // i have my list of meshes - go from there? or are they not linked as references - to resolve
         for (let i = 0; i < instanceCount; ++i) {
-            const rotation = this.rotations[i];
+            const rotation = entity.rotations[i];
             rotation.x += rotation.speed;
             rotation.y += rotation.speed;
             rotation.z += rotation.speed;
@@ -112,35 +107,11 @@ class InstancingWithModsSystem extends System {
                 .makeRotationY(rotation.y)
                 .makeRotationZ(rotation.z);
 
-            this.meshes[i].instanceMatrix.multiplyMatrices(matrix, meshes[i].matrix);
+            // todo - does these update in the animate loop properly? or will i have to do a reload of the meshes
+            // based on object3D?
+            entity.meshes[i].instanceMatrix.multiplyMatrices(matrix, meshes[i].matrix);
         }
     }
 }
 
 let instModsSystem = new InstancingWithModsSystem();
-
-
-//--------------
-
-
-// function animate() {
-//     requestAnimationFrame(animate);
-
-//     for (let i = 0; i < instanceCount; i++) {
-//         const rotation = rotations[i];
-//         rotation.x += rotation.speed;
-//         rotation.y += rotation.speed;
-//         rotation.z += rotation.speed;
-
-//         matrix.identity()
-//             .makeRotationX(rotation.x)
-//             .makeRotationY(rotation.y)
-//             .makeRotationZ(rotation.z);
-
-//         meshes[i].instanceMatrix.multiplyMatrices(matrix, meshes[i].matrix);
-//     }
-
-//     renderer.render(scene, camera);
-// }
-// animate();
-
