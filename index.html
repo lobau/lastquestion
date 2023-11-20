@@ -14,25 +14,6 @@
             font-weight: 400;
         }
 
-        @font-face {
-            font-family: 'Hepta Slab';
-            src: url('./fonts/HeptaSlab-Bold.ttf') format('truetype');
-            font-weight: 700;
-        }
-
-        @font-face {
-            font-family: 'Zilla Slab';
-            src: url('./fonts/ZillaSlab-Medium.ttf') format('truetype');
-            font-weight: 400;
-        }
-
-        @font-face {
-            font-family: 'Zilla Slab';
-            src: url('./fonts/ZillaSlab-Bold.ttf') format('truetype');
-            font-weight: 700;
-        }
-
-
         * {
             padding: 0;
             margin: 0;
@@ -59,7 +40,19 @@
         }
 
         mr-column {
+            display: block;
             height: 100%;
+        }
+
+        mr-row {
+            display: block;
+            width: 100%;
+        }
+
+        mr-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
 
         .mainContainer {
@@ -72,10 +65,10 @@
 
         .title {
             font-size: 48px;
-            line-height: 100%;
+            line-height: 110%;
             color: #333333;
             font-family: "Hepta Slab";
-            font-weight: 700;
+            font-weight: 400;
             text-align: center;
             margin-top: 60px;
         }
@@ -84,7 +77,8 @@
             font-size: 18px;
             line-height: 100%;
             color: #333333;
-            font-weight: 700;
+            font-family: sans-serif;
+            font-weight: 400;
             text-align: center;
             margin-top: 30px;
         }
@@ -97,6 +91,7 @@
             font-weight: 400;
             /* width: 100%; */
             margin-top: 40px;
+            margin-bottom: 40px;
             /* margin-bottom: 20px; */
             text-align: center;
         }
@@ -116,15 +111,30 @@
             text-align: left;
         }
 
+        .daffodil-row {}
+
         .daffodil {
             scale: 0.01;
             z-index: 0;
+            height: 100px;
+        }
+
+        .daffodil2 {
+            scale: 0.5;
+            z-index: 30;
+            height: 100px;
         }
 
         .logo {
             scale: 0.001;
             z-index: 10;
             height: 100px;
+        }
+
+        .star {
+            scale: 0.01;
+            z-index: 0;
+            height: 60px;
         }
 
         #debug {
@@ -149,17 +159,18 @@
 
 <body>
     <video id="background" src="/images/coffee_shop.mp4" playsinline="" autoplay="" muted="" loop=""></video>
-    <mr-app debug="false" camera="camera: perspective">
+    <mr-app debug="true" camera="camera: perspective">
         <mr-surface fixed="true">
-            <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
+            <!-- <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                 <mr-model class="daffodil" height="0.1" position="1 0 0"
                     comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
-                    src="./assets/daffodil.stl" rotation="0 180 0">
+                    src="./assets/daffodil_flower.glb" rotation="0 180 0">
                 </mr-model>
-            </mr-entity>
+            </mr-entity> -->
 
             <!-- <mr-container class="mainContainer" rotation="-20 0 0" position="0 -0.1 0"> -->
             <mr-container class="mainContainer">
+
                 <mr-column>
                     <mr-text class="title">I Wandered
                         Lonely as a Cloud</mr-text>
@@ -171,15 +182,26 @@
                         A host, of golden daffodils;
                     </mr-text>
 
-                    <!-- <mr-entity rotation="90 0 0"
-                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                        <mr-model class="logo" src="./assets/logo.stl"></mr-model>
-                    </mr-entity> -->
 
-                    <!-- <mr-img class="inlineImage" src="./images/placeholder.jpg"></mr-img> -->
+                    <mr-row class="daffodil-row">
+                        <mr-entity position="0 0 0" rotation="0 0 0"
+                            comp-animation="type: oscillate-z; amplitude: 1; maxspeed: -0.2; acceleration: -0.8;">
+                            <mr-model class="daffodil2" src="./assets/daffodil_flower.glb"></mr-model>
+                        </mr-entity>
 
-                    <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0"></mr-model>
+                        <mr-entity position="0.5 0 0" rotation="0 0 0"
+                            comp-animation="type: oscillate-z; amplitude: 1; maxspeed: -0.2; acceleration: -0.8;">
+                            <mr-model class="daffodil2" src="./assets/daffodil_flower.glb"></mr-model>
+                        </mr-entity>
+
+                        <mr-entity position="1 0 0" rotation="0 0 0"
+                            comp-animation="type: oscillate-z; amplitude: 1; maxspeed: -0.2; acceleration: -0.8;">
+                            <mr-model class="daffodil2" src="./assets/daffodil_flower.glb"></mr-model>
+                        </mr-entity>
+                    </mr-row>
+
+
+                    <mr-img src="./images/daffodils.jpg"></mr-img>
 
                     <mr-text class="paragraph">
                         Beside the lake, beneath the trees,
@@ -188,9 +210,9 @@
                         And twinkle on the milky way,
                     </mr-text>
 
-                    <mr-entity position="0 0 0.025" rotation="90 0 0"
-                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                        <mr-model class="logo" src="./assets/logo.stl"></mr-model>
+                    <mr-entity position="0 0 0.02" rotation="0 0 0"
+                        comp-animation="type: rotate-y; maxspeed: -0.02; acceleration: -0.00008;">
+                        <mr-model class="star" src="./assets/star.glb"></mr-model>
                     </mr-entity>
 
                     <mr-text class="paragraph">
@@ -200,8 +222,8 @@
                         Tossing their heads in sprightly dance.
                     </mr-text>
 
-                    <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0"></mr-model>
+                    <!-- <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
+                        rotation="0 90 0"></mr-model> -->
 
                     <mr-text class="paragraph">
                         The waves beside them danced; but they
@@ -210,9 +232,14 @@
                         In such a jocund company:
                     </mr-text>
 
-                    <mr-entity position="0 0 0.025" rotation="90 0 0"
+                    <!-- <mr-entity position="0 0 0.025" rotation="90 0 0"
                         comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                         <mr-model class="logo" src="./assets/logo.stl"></mr-model>
+                    </mr-entity> -->
+
+                    <mr-entity position="0 0 0.02" rotation="0 0 0"
+                        comp-animation="type: rotate-y; maxspeed: -0.02; acceleration: -0.00008;">
+                        <mr-model class="star" src="./assets/star.glb"></mr-model>
                     </mr-entity>
 
                     <mr-text class="paragraph">
@@ -222,8 +249,13 @@
                         In vacant or in pensive mood,
                     </mr-text>
 
-                    <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0"></mr-model>
+                    <mr-entity position="0 0 0.025" rotation="0 90 90"
+                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
+                        <mr-model class="daffodil" src="./assets/daffodil.stl"></mr-model>
+                    </mr-entity>
+
+                    <!-- <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
+                        rotation="0 90 0"></mr-model> -->
 
                     <mr-text class="paragraph">
                         They flash upon that inward eye
@@ -232,7 +264,7 @@
                         And dances with the daffodils.
                     </mr-text>
 
-                    <mr-entity position="0 0 0.025" rotation="90 0 0"
+                    <mr-entity position="0 0 0.025" rotation="0 90 90"
                         comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                         <mr-model class="logo" src="./assets/logo.stl"></mr-model>
                     </mr-entity>
@@ -248,7 +280,7 @@
             </mr-container>
 
             <!-- <mr-container position="-0.2 0 0.1" class="toolbar" rotation="-20 0 0"> -->
-            <mr-container class="toolbar" position="-0.5 0 0.1" >
+            <mr-container class="toolbar" position="0 0.5 0.1">
                 <mr-text id="debug">0</mr-text>
             </mr-container>
 
@@ -260,7 +292,7 @@
         <mr-sky id="sky2" data-texture="./skybox/watercolor03.jpg"></mr-sky>
         <mr-sky id="sky3" data-texture="./skybox/skybox2.jpg"></mr-sky>
 
-        <mr-light color="#feffd4" intensity="10" position="0 0.4 0.4"></mr-light>
+        <mr-light color="#feffd4" intensity="5" position="0 2 2"></mr-light>
 
         <mr-model id="island" position="0 -1 -2" src="./assets/island.glb" rotation="0 90 0" zoffset="0.05"
             scale="0.001">
