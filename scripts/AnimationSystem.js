@@ -2,7 +2,7 @@ class AnimationSystem extends System {
     constructor() {
         super()
 
-        console.log(this.componentName);
+        // console.log(this.componentName);
     }
 
     update(deltaTime, frame) {
