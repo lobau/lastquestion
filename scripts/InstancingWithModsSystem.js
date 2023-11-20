@@ -31,6 +31,8 @@ class InstancingWithModsSystem extends System {
         console.log(entity);
         console.log(data);
 
+        // entity.components.set("animation", { speed: 0 })
+
         createInstances();
         addToScene(entity.geometry);
     }
