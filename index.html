@@ -151,14 +151,14 @@
     <video id="background" src="/images/coffee_shop.mp4" playsinline="" autoplay="" muted="" loop=""></video>
     <mr-app debug="false" camera="camera: perspective">
         <mr-surface fixed="true">
-            <mr-entity rotation="90 0 0" data-comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                <mr-model class="daffodil" height="0.1" position="1 0 0"
+            <mr-entity data-rotation="90 0 0" data-comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
+                <mr-model class="daffodil" height="0.1" data-position="1 0 0"
                     data-comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
-                    src="./assets/daffodil.stl" rotation="0 180 0">
+                    src="./assets/daffodil.stl" data-rotation="0 180 0">
                 </mr-model>
             </mr-entity>
 
-            <!-- <mr-container class="mainContainer" rotation="-20 0 0" position="0 -0.1 0"> -->
+            <!-- <mr-container class="mainContainer" data-rotation="-20 0 0" data-position="0 -0.1 0"> -->
             <mr-container class="mainContainer">
                 <mr-column>
                     <mr-text class="title">I Wandered
@@ -171,15 +171,15 @@
                         A host, of golden daffodils;
                     </mr-text>
 
-                    <!-- <mr-entity rotation="90 0 0"
+                    <!-- <mr-entity data-rotation="90 0 0"
                         comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                         <mr-model class="logo" src="./assets/logo.stl"></mr-model>
                     </mr-entity> -->
 
                     <!-- <mr-img class="inlineImage" src="./images/placeholder.jpg"></mr-img> -->
 
-                    <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0"></mr-model>
+                    <mr-model class="daffodil" data-position="-0.06 0 0" src="./assets/daffodil.stl"
+                        data-rotation="0 90 0"></mr-model>
 
                     <mr-text class="paragraph">
                         Beside the lake, beneath the trees,
@@ -188,7 +188,7 @@
                         And twinkle on the milky way,
                     </mr-text>
 
-                    <mr-entity position="0 0 0.025" rotation="90 0 0"
+                    <mr-entity data-position="0 0 0.025" data-rotation="90 0 0"
                         data-comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                         <mr-model class="logo" src="./assets/logo.stl"></mr-model>
                     </mr-entity>
@@ -200,8 +200,8 @@
                         Tossing their heads in sprightly dance.
                     </mr-text>
 
-                    <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0"></mr-model>
+                    <mr-model class="daffodil" data-position="-0.06 0 0" src="./assets/daffodil.stl"
+                        data-rotation="0 90 0"></mr-model>
 
                     <mr-text class="paragraph">
                         The waves beside them danced; but they
@@ -210,7 +210,7 @@
                         In such a jocund company:
                     </mr-text>
 
-                    <mr-entity position="0 0 0.025" rotation="90 0 0"
+                    <mr-entity data-position="0 0 0.025" data-rotation="90 0 0"
                         data-comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                         <mr-model class="logo" src="./assets/logo.stl"></mr-model>
                     </mr-entity>
@@ -222,8 +222,8 @@
                         In vacant or in pensive mood,
                     </mr-text>
 
-                    <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0"></mr-model>
+                    <mr-model class="daffodil" data-position="-0.06 0 0" src="./assets/daffodil.stl"
+                        data-rotation="0 90 0"></mr-model>
 
                     <mr-text class="paragraph">
                         They flash upon that inward eye
@@ -232,7 +232,7 @@
                         And dances with the daffodils.
                     </mr-text>
 
-                    <mr-entity position="0 0 0.025" rotation="90 0 0"
+                    <mr-entity data-position="0 0 0.025" data-rotation="90 0 0"
                         data-comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                         <mr-model class="logo" src="./assets/logo.stl"></mr-model>
                     </mr-entity>
@@ -247,8 +247,8 @@
 
             </mr-container>
 
-            <!-- <mr-container position="-0.2 0 0.1" class="toolbar" rotation="-20 0 0"> -->
-            <mr-container class="toolbar" position="-0.5 0 0.1" >
+            <!-- <mr-container data-position="-0.2 0 0.1" class="toolbar" data-rotation="-20 0 0"> -->
+            <mr-container class="toolbar" data-position="-0.5 0 0.1" >
                 <mr-text id="debug">0</mr-text>
             </mr-container>
 
@@ -260,9 +260,9 @@
         <mr-sky id="sky2" data-texture="./skybox/watercolor03.jpg"></mr-sky>
         <mr-sky id="sky3" data-texture="./skybox/skybox2.jpg"></mr-sky>
 
-        <mr-light color="white" intensity="10" position="0 10 0.2"></mr-light>
+        <mr-light color="white" intensity="10" data-position="0 10 0.2"></mr-light>
 
-        <mr-model id="island" position="0 -1 -2" src="./assets/island.glb" rotation="0 90 0" zoffset="0.05"
+        <mr-model id="island" data-position="0 -1 -2" src="./assets/island.glb" data-rotation="0 90 0" zoffset="0.05"
             scale="0.001">
         </mr-model>
 
