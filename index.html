@@ -374,18 +374,18 @@
     const island = document.querySelector("#island");
     const debug = document.querySelector("#debug");
 
-    // island.object3D.material.opacity = 0;
-    // island.material.set("opacity", 0);
-    island.traverse(obj => { if (obj.isMesh) { obj.material.opacity = 0 } })
+    island.traverse(obj => {
+        if (obj.isMesh) {
+            obj.material.transparent = true;
+            obj.material.opacity = 0
+        }
+    })
 
     const update = (event) => {
-        // console.log(event);
         const position = container.shuttle.position.y
 
         island.object3D.position.z = 0.5 * position - 1;
         island.object3D.rotation.y = -0.25 * position + 90;
-        // island.object3D.material.opacity = position;
-
         island.traverse(obj => { if (obj.isMesh) { obj.material.opacity = position } })
 
         skybox0.object3D.rotation.y = 0.25 * position + 90;
