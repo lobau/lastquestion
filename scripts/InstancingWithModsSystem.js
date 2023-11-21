@@ -12,6 +12,7 @@ class InstancingWithModsSystem extends System {
         let this.scales = null;
         let this.rotations = null;
         let this.meshes = [];
+        let this.geometry = null;
     }
 
     update(deltaTime, frame) {
@@ -28,13 +29,13 @@ class InstancingWithModsSystem extends System {
     }
 
     attachedComponent(entity, data) {
+        console.log('in attachedComponent');
         console.log(entity);
         console.log(data);
 
-        // entity.components.set("animation", { speed: 0 })
-
         createInstances();
-        addToScene(entity.geometry);
+        addToScene(entity.components.get("geometry"));
+        console.log('done with attachedComponent');
     }
 
     createInstances() {
