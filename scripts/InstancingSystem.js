@@ -31,7 +31,7 @@ class InstancingSystem extends System {
         }
     }
 
-    attachedComponent(entity, data) {
+    attachedComponent(entity) {
         console.log('in attachedComponent');
         console.log('entity is:');
         console.log(entity);
@@ -96,7 +96,7 @@ class InstancingSystem extends System {
         }
     }
 
-    updatedComponent(entity, data) {
+    updatedComponent(entity) {
 
     }
 
