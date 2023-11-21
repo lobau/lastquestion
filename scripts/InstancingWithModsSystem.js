@@ -15,6 +15,7 @@ class InstancingSystem extends System {
         let this.rotations = null;
         let this.meshes = [];
         let this.geometry = null;
+        console.log('constructed an instancing system');
     }
 
     update(deltaTime, frame) {
@@ -32,10 +33,14 @@ class InstancingSystem extends System {
 
     attachedComponent(entity, data) {
         console.log('in attachedComponent');
+        console.log('entity is:');
         console.log(entity);
+        console.log('data is:');
         console.log(data);
 
-        createInstances();
+        this.createInstances();
+        console.log(entity.object3D);
+        geometry = entity.object3D.geometry;
         addToScene(entity.components.get("geometry"));
         console.log('done with attachedComponent');
     }
