@@ -41,7 +41,8 @@ class InstancingSystem extends System {
         this.createInstances();
         console.log(entity.object3D);
         geometry = entity.object3D.geometry;
-        addToScene(entity.components.get("geometry"));
+        addToScene(geometry);
+        console.log(entity);
         console.log('done with attachedComponent');
     }
 
