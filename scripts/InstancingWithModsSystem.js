@@ -1,4 +1,6 @@
-class InstancingWithModsSystem extends System {
+class InstancingSystem extends System {
+
+    // todo - title it InstancingWithModsSystem
 
     constructor() {
         super();
@@ -117,4 +119,4 @@ class InstancingWithModsSystem extends System {
     }
 }
 
-let instModsSystem = new InstancingWithModsSystem();
+let instancingSystem = new InstancingSystem();
