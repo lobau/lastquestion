@@ -20,7 +20,7 @@ class InstancingSystem extends System {
 
     update(deltaTime, frame) {
         for(const entity of this.registry){
-            switch (entity.instancing?.type) {
+            switch (entity.components.get('instancing')?.type) {
                 case 'animate':
                     this.animate(entity)
                     break;
