@@ -20,9 +20,9 @@ class InstancingSystem extends System {
 
     update(deltaTime, frame) {
         for(const entity of this.registry){
-            switch (entity.animation?.type) {
-                case 'rotate':
-                    this.rotate(entity)
+            switch (entity.instancing?.type) {
+                case 'animate':
+                    this.animate(entity)
                     break;
 
                 default:
@@ -105,6 +105,7 @@ class InstancingSystem extends System {
     }
 
     animate = (entity) => {
+        console.log('inside the animate function');
         // todo - how to let one entity have more than one object3D in it??
         // i have my list of meshes - go from there? or are they not linked as references - to resolve
         for (let i = 0; i < instanceCount; ++i) {
