@@ -77,8 +77,9 @@ class AnimationSystem extends System {
             entity.animation.speed += parseFloat(entity.animation.acceleration)
         }
         entity.animation.progress += 0.02;
-        let amplitude = (entity.animation.amplitude) ? entity.animation.amplitude : 0;
-        entity.object3D.rotation.z = Math.cos(entity.animation.progress) * amplitude;
+        let amplitude = (entity.animation.amplitude) ? entity.animation.amplitude : 1;
+        let offset = (entity.animation.ampoffset) ? entity.animation.ampoffset : 0;
+        entity.object3D.rotation.z = Math.cos(entity.animation.progress + offset) * amplitude;
     }
 }
 
