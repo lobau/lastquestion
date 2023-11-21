@@ -186,7 +186,7 @@
 
 <body>
     <video id="background" src="/images/coffee_shop.mp4" playsinline="" autoplay="" muted="" loop=""></video>
-    <mr-app debug="true" camera="camera: perspective">
+    <mr-app debug="false" camera="camera: perspective">
         <mr-surface fixed="true">
             <!-- <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
                 <mr-model class="daffodil" height="0.1" position="1 0 0"
@@ -304,9 +304,9 @@
             </mr-container>
 
             <!-- <mr-container position="-0.2 0 0.1" class="toolbar" rotation="-20 0 0"> -->
-            <mr-container class="toolbar" position="0 0.5 0.1">
+            <!-- <mr-container class="toolbar" position="0 0.5 0.1">
                 <mr-text id="debug">0</mr-text>
-            </mr-container>
+            </mr-container> -->
 
 
         </mr-surface>
@@ -412,8 +412,8 @@
             const position = container.shuttle.position.y
 
             const island = document.querySelector("#island");
-            island.object3D.position.z = position * 2 - 2;
-            island.object3D.rotation.y = -1 * position + 90;
+            island.object3D.position.z = position - 2;
+            island.object3D.rotation.y = -0.5 * position + 90;
             // How do we change the opacity of the island?
             // island.object3D.scale.setScalar(position);
 
@@ -450,8 +450,8 @@
             //     skybox3.setOpacity(0);
             // }
 
-            const debug = document.querySelector("#debug");
-            debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
+            // const debug = document.querySelector("#debug");
+            // debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
         })
     });
 </script>
