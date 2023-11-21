@@ -14,12 +14,12 @@
             font-weight: 400;
         }
 
-        /* * {
+        * {
             padding: 0;
             margin: 0;
             border: none;
             border-collapse: collapse;
-        } */
+        }
 
         html {
             overflow: hidden;
@@ -55,16 +55,17 @@
             object-fit: cover;
         } */
 
-        .img-daffodils, .img-heart {
+        .img-daffodils,
+        .img-heart {
             width: 100%;
             object-fit: cover;
         }
 
-        .img-daffodils { 
+        .img-daffodils {
             height: 400px;
         }
 
-        .img-heart { 
+        .img-heart {
             height: 500px;
         }
 
@@ -75,6 +76,8 @@
             border-radius: 20px;
             height: 500px;
             width: 80vw;
+            padding-left: 30px;
+            padding-right: 30px;
         }
 
         .title {
@@ -127,7 +130,7 @@
 
         .daffodil-row {
             display: block;
-            background-color: rgb(255, 180, 115);
+            /* background-color: rgb(255, 180, 115); */
             height: 200px;
             margin-top: 100px;
             margin-bottom: 100px;
@@ -218,8 +221,8 @@
                         And twinkle on the milky way,
                     </mr-text>
 
-                    <mr-entity position="0 0 0.02" rotation="0 0 0"
-                        comp-animation="type: rotate-y; maxspeed: -0.02; acceleration: -0.00008;">
+                    <mr-entity data-position="0 0 0.05" data-rotation="0 0 0"
+                        data-comp-animation="type: rotate-y; maxspeed: -0.02; acceleration: -0.00008;">
                         <mr-model class="star" src="./assets/star.glb"></mr-model>
                     </mr-entity>
 
@@ -238,31 +241,21 @@
                     </mr-text>
 
                     <mr-text class="daffodil-row">
-                        <mr-entity
-                            comp-animation="type: oscillate-z; amplitude: 1; ampoffset: 0; maxspeed: -0.2; acceleration: -0.8;">
+                        <mr-entity data-position="-0.3 0 0"
+                            data-comp-animation="type: oscillate-z; amplitude: 1; ampoffset: 0; maxspeed: -0.2; acceleration: -0.8;">
                             <mr-model class="daffodil2" src="./assets/daffodil_flower.glb"></mr-model>
                         </mr-entity>
 
-                        <mr-entity position="-0.25 0 0"
-                            comp-animation="type: oscillate-z; amplitude: 1; ampoffset: 0.5; maxspeed: -0.2; acceleration: -0.008;">
+                        <mr-entity data-position="0 0 0"
+                            data-comp-animation="type: oscillate-z; amplitude: 1; ampoffset: 0.5; maxspeed: -0.2; acceleration: -0.008;">
                             <mr-model class="daffodil3" src="./assets/daffodil_flower.glb"></mr-model>
                         </mr-entity>
 
-                        <mr-entity position="0.25 0 0"
-                            comp-animation="type: oscillate-z; amplitude: 1; ampoffset: 0.25; maxspeed: -0.2; acceleration: -0.08;">
+                        <mr-entity data-position="0.3 0 0"
+                            data-comp-animation="type: oscillate-z; amplitude: 1; ampoffset: 0.25; maxspeed: -0.2; acceleration: -0.08;">
                             <mr-model class="daffodil3" src="./assets/daffodil_flower.glb"></mr-model>
                         </mr-entity>
-
                     </mr-text>
-                    <!-- <mr-entity position="0 0 0.025" rotation="90 0 0"
-                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                        <mr-model class="logo" src="./assets/logo.stl"></mr-model>
-                    </mr-entity> -->
-
-                    <!-- <mr-entity position="0 0 0.03" rotation="0 0 0"
-                        comp-animation="type: rotate-y; maxspeed: -0.02; acceleration: -0.00008;">
-                        <mr-model class="star" src="./assets/star.glb"></mr-model>
-                    </mr-entity> -->
 
                     <mr-text class="paragraph">
                         I gazed—and gazed—but little thought
@@ -270,14 +263,6 @@
                         For oft, when on my couch I lie
                         In vacant or in pensive mood,
                     </mr-text>
-                    <!-- 
-                    <mr-entity position="0 0 0.025" rotation="0 90 90"
-                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                        <mr-model class="daffodil" src="./assets/daffodil.stl"></mr-model>
-                    </mr-entity> -->
-
-                    <!-- <mr-model class="daffodil" position="-0.06 0 0" src="./assets/daffodil.stl"
-                        rotation="0 90 0"></mr-model> -->
 
                     <mr-text class="paragraph">
                         They flash upon that inward eye
@@ -286,28 +271,18 @@
                         And dances with the daffodils.
                     </mr-text>
 
-                    <!-- <mr-entity position="0 0 0.025" rotation="0 90 90"
-                        comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                        <mr-model class="logo" src="./assets/logo.stl"></mr-model>
-                    </mr-entity> -->
-
                     <mr-img class="img-heart" src="./images/redheart.jpg"></mr-img>
 
-                    <!-- <mr-text class="paragraph-end">
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                    </mr-text> -->
                 </mr-column>
 
             </mr-container>
 
-            <!-- <mr-container position="-0.2 0 0.1" class="toolbar" rotation="-20 0 0"> -->
-            <!-- <mr-container class="toolbar" position="0 0.5 0.1">
+            <!-- <mr-container data-position="-0.2 0 0.1" class="toolbar" data-rotation="-20 0 0"> -->
+            <mr-container class="toolbar" data-position="0 0.5 0.1">
                 <mr-text id="debug">0</mr-text>
-            </mr-container> -->
+            </mr-container>
 
+            <mr-light color="white" intensity="1" data-position="0 1 0.5"></mr-light>
 
         </mr-surface>
 
@@ -316,10 +291,10 @@
         <mr-sky id="sky2" data-texture="./skybox/skydome02.jpg"></mr-sky>
         <mr-sky id="sky3" data-texture="./skybox/skybox2.jpg"></mr-sky>
 
-        <mr-light color="#feffd4" intensity="5" position="0 2 2"></mr-light>
+        <mr-light color="white" intensity="1" data-position="0 0 1"></mr-light>
 
-        <mr-model id="island" position="0 -1.5 -2" src="./assets/island.glb" rotation="0 90 0" zoffset="0.05"
-            scale="0.001">
+        <mr-model id="island" data-position="0 -1.5 -2" src="./assets/island.glb" data-rotation="0 90 0">
+            <mr-light color="#feffd4" intensity="1" data-position="0 0.5 1"></mr-light>
         </mr-model>
 
     </mr-app>
@@ -346,7 +321,7 @@
             this.goalOpacity = 0;
 
             this.object3D = new THREE.Mesh(this.geometry, this.material);
-            // this.object3D.rotateY(90);
+            this.object3D.rotateY(90);
         }
 
         setOpacity(opacity) {
@@ -388,71 +363,66 @@
 <script src="./scripts/AnimationSystem.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-        console.log("DOM fully loaded and parsed");
+    const skybox0 = document.querySelector("#sky0");
+    const skybox1 = document.querySelector("#sky1");
+    const skybox2 = document.querySelector("#sky2");
+    const skybox3 = document.querySelector("#sky3");
+    const container = document.querySelector("mr-container");
+    const island = document.querySelector("#island");
+    const debug = document.querySelector("#debug");
 
-        const skybox0 = document.querySelector("#sky0");
-        const skybox1 = document.querySelector("#sky1");
-        const skybox2 = document.querySelector("#sky2");
-        const skybox3 = document.querySelector("#sky3");
+    const update = (event) => {
+        console.log(event);
+        const position = container.shuttle.position.y
+
+        island.object3D.position.z = position - 2;
+        island.object3D.rotation.y = -0.5 * position + 90;
+
+        if (container.shuttle.position.y < 0.025) {
+            skybox0.setOpacity(0);
+            skybox1.setOpacity(0);
+            skybox2.setOpacity(0);
+            skybox3.setOpacity(0);
+        } else if (container.shuttle.position.y < 0.05) {
+            skybox0.setOpacity(0.5);
+            skybox1.setOpacity(0);
+            skybox2.setOpacity(0);
+            skybox3.setOpacity(0);
+        } else if (container.shuttle.position.y < 0.8) {
+            skybox0.setOpacity(0.5);
+            skybox1.setOpacity(1);
+            skybox2.setOpacity(0);
+            skybox3.setOpacity(0);
+        } else if (container.shuttle.position.y < 2.1) {
+            skybox0.setOpacity(0.5);
+            skybox1.setOpacity(1);
+            skybox2.setOpacity(1);
+            skybox3.setOpacity(0);
+        } else if (container.shuttle.position.y < 10) {
+            skybox0.setOpacity(0);
+            skybox1.setOpacity(0);
+            skybox2.setOpacity(0);
+            skybox3.setOpacity(0);
+        }
+
+        debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
+    }
+
+    document.addEventListener("DOMContentLoaded", (event) => {
         skybox0.setOpacity(0);
         skybox1.setOpacity(0);
         skybox2.setOpacity(0);
         skybox3.setOpacity(0);
 
-        const container = document.querySelector("mr-container");
         let textureLoader = new THREE.TextureLoader();
         container.background.material.opacity = 0.5;
 
-        const island = document.querySelector("#island");
+        
         island.object3D.position.z = -2;
         island.object3D.rotation.y = 90;
 
-        container.addEventListener("touch", (event) => {
-            const position = container.shuttle.position.y
-
-            const island = document.querySelector("#island");
-            island.object3D.position.z = position - 2;
-            island.object3D.rotation.y = -0.5 * position + 90;
-            // How do we change the opacity of the island?
-            // island.object3D.scale.setScalar(position);
-
-            if (container.shuttle.position.y < 0.025) {
-                skybox0.setOpacity(0);
-                skybox1.setOpacity(0);
-                skybox2.setOpacity(0);
-                skybox3.setOpacity(0);
-            } else if (container.shuttle.position.y < 0.05) {
-                skybox0.setOpacity(0.5);
-                skybox1.setOpacity(0);
-                skybox2.setOpacity(0);
-                skybox3.setOpacity(0);
-            } else if (container.shuttle.position.y < 0.8) {
-                skybox0.setOpacity(0.5);
-                skybox1.setOpacity(1);
-                skybox2.setOpacity(0);
-                skybox3.setOpacity(0);
-            } else if (container.shuttle.position.y < 2.1) {
-                skybox0.setOpacity(0.5);
-                skybox1.setOpacity(1);
-                skybox2.setOpacity(1);
-                skybox3.setOpacity(0);
-            } else if (container.shuttle.position.y < 10) {
-                skybox0.setOpacity(0);
-                skybox1.setOpacity(0);
-                skybox2.setOpacity(0);
-                skybox3.setOpacity(0);
-            }
-            // } else {
-            //     skybox0.setOpacity(0);
-            //     skybox1.setOpacity(0);
-            //     skybox2.setOpacity(0);
-            //     skybox3.setOpacity(0);
-            // }
-
-            // const debug = document.querySelector("#debug");
-            // debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
-        })
+        container.addEventListener("touch", update);
+        document.addEventListener("wheel", update);
     });
 </script>
 

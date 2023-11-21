@@ -7,7 +7,7 @@ class AnimationSystem extends System {
 
     update(deltaTime, frame) {
         for (const entity of this.registry) {
-            switch (entity.animation?.type) {
+            switch (entity.components.get("animation")?.type) {
                 case 'rotate':
                     this.rotate(entity)
                     break;
@@ -29,11 +29,9 @@ class AnimationSystem extends System {
         }
     }
 
-    attachedComponent(entity, data) {
-        // console.log(data);
-        entity.animation = data
-        entity.animation.speed = 0
-        entity.animation.progress = 0
+    attachedComponent(entity) {
+        entity.components.set("animation", { speed: 0});
+        entity.components.set("animation", { progress: 0});
     }
 
     updatedComponent(entity, data) {
@@ -45,41 +43,46 @@ class AnimationSystem extends System {
     }
 
     rotate = (entity) => {
-        if (Math.abs(entity.animation.speed) < Math.abs(entity.animation.maxspeed)) {
-            entity.animation.speed += parseFloat(entity.animation.acceleration)
+        if (Math.abs(entity.components.get("animation").speed) < Math.abs(entity.components.get("animation").maxspeed)) {
+            entity.components.get("animation").speed += parseFloat(entity.components.get("animation").acceleration)
         }
-        entity.object3D.rotation.z += entity.animation.speed;
+        entity.object3D.rotation.z += entity.components.get("animation").speed;
     }
 
     rotateX = (entity) => {
-        if (Math.abs(entity.animation.speed) < Math.abs(entity.animation.maxspeed)) {
-            entity.animation.speed += parseFloat(entity.animation.acceleration)
+        let component = entity.components.get("animation");
+        if (Math.abs(component.speed) < Math.abs(component.maxspeed)) {
+            entity.components.set("animation", {speed: parseFloat(component.speed) + parseFloat(component.acceleration)});
         }
-        entity.object3D.rotation.x += entity.animation.speed;
+        entity.object3D.rotation.x += parseFloat(component.speed);
     }
 
     rotateY = (entity) => {
-        if (Math.abs(entity.animation.speed) < Math.abs(entity.animation.maxspeed)) {
-            entity.animation.speed += parseFloat(entity.animation.acceleration)
+        let component = entity.components.get("animation");
+        if (Math.abs(component.speed) < Math.abs(component.maxspeed)) {
+            entity.components.set("animation", {speed: parseFloat(component.speed) + parseFloat(component.acceleration)});
         }
-        entity.object3D.rotation.y += entity.animation.speed;
+        entity.object3D.rotation.y += parseFloat(component.speed);
     }
 
     rotateZ = (entity) => {
-        if (Math.abs(entity.animation.speed) < Math.abs(entity.animation.maxspeed)) {
-            entity.animation.speed += parseFloat(entity.animation.acceleration)
+        let component = entity.components.get("animation");
+        if (Math.abs(component.speed) < Math.abs(component.maxspeed)) {
+            entity.components.set("animation", {speed: parseFloat(component.speed) + parseFloat(component.acceleration)});
         }
-        entity.object3D.rotation.z += entity.animation.speed;
+        entity.object3D.rotation.z += parseFloat(component.speed);
     }
 
     oscillateZ = (entity) => {
-        if (Math.abs(entity.animation.speed) < Math.abs(entity.animation.maxspeed)) {
-            entity.animation.speed += parseFloat(entity.animation.acceleration)
+        let component = entity.components.get("animation");
+        if (Math.abs(component.speed) < Math.abs(component.maxspeed)) {
+            entity.components.set("animation", {speed: parseFloat(component.speed) + parseFloat(component.acceleration)});
         }
-        entity.animation.progress += 0.02;
-        let amplitude = (entity.animation.amplitude) ? entity.animation.amplitude : 1;
-        let offset = (entity.animation.ampoffset) ? entity.animation.ampoffset : 0;
-        entity.object3D.rotation.z = Math.cos(entity.animation.progress + offset) * amplitude;
+        entity.components.set("animation", {progress: parseFloat(component.progress) + 0.02});
+        // entity.components.get("animation").progress += 0.02;
+        let amplitude = (component.amplitude) ? parseFloat(component.amplitude) : 1;
+        let offset = (component.ampoffset) ? parseFloat(component.ampoffset) : 0;
+        entity.object3D.rotation.z = Math.cos(parseFloat(component.progress) + offset) * amplitude;
     }
 }
 
