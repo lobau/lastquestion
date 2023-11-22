@@ -7,14 +7,14 @@ class InstancingSystem extends System {
 
         console.log(this.componentName);
 
-        const this.instanceCount = 5;
+        this.instanceCount = 5;
 
         // DataOrientedDesign arrays
-        let this.positions = null;
-        let this.scales = null;
-        let this.rotations = null;
-        let this.meshes = [];
-        let this.geometry = null;
+        this.positions = null;
+        this.scales = null;
+        this.rotations = null;
+        this.meshes = [];
+        this.geometry = null;
         console.log('constructed an instancing system');
     }
 
@@ -35,12 +35,16 @@ class InstancingSystem extends System {
         console.log('in attachedComponent');
         console.log('entity is:');
         console.log(entity);
-        console.log('data is:');
-        console.log(data);
 
         this.createInstances();
         console.log(entity.object3D);
-        geometry = entity.object3D.geometry;
+        console.log('hi4 - (entity.object3D.children)[0]');
+        let hi = entity.object3D.children;
+        console.log(hi);
+        console.log(hi.)
+        console.log(hi[0]);
+        console.log('hi5 - geometry grab based on isGroup');
+        let geometry = entity.object3D.isGroup ? (entity.object3D.children)[0] : entity.object3D;
         addToScene(geometry);
         console.log(entity);
         console.log('done with attachedComponent');
@@ -48,11 +52,11 @@ class InstancingSystem extends System {
 
     createInstances() {
         // Create buffers for positions, scales, and rotations of instances
-        this.positions = new Float32Array(instanceCount * 3);
-        this.scales = new Float32Array(instanceCount * 3);
-        this.rotations = new Array(instanceCount);
+        this.positions = new Float32Array(this.instanceCount * 3);
+        this.scales = new Float32Array(this.instanceCount * 3);
+        this.rotations = new Array(this.instanceCount);
 
-        for (let i = 0; i < instanceCount; ++i) {
+        for (let i = 0; i < this.instanceCount; ++i) {
             const x = Math.random() * 10.0 - 5.0;
             const y = Math.random() * 10.0 - 5.0;
             const z = Math.random() * 10.0 - 5.0;
@@ -87,7 +91,7 @@ class InstancingSystem extends System {
 
         const matrix = new THREE.Matrix4();
 
-        for (let i = 0; i < instanceCount; i++) {
+        for (let i = 0; i < this.instanceCount; i++) {
             const mesh = new THREE.Mesh(instancedGeometry, material);
             mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
             this.meshes.push(mesh);
@@ -108,7 +112,7 @@ class InstancingSystem extends System {
         console.log('inside the animate function');
         // todo - how to let one entity have more than one object3D in it??
         // i have my list of meshes - go from there? or are they not linked as references - to resolve
-        for (let i = 0; i < instanceCount; ++i) {
+        for (let i = 0; i < this.instanceCount; ++i) {
             const rotation = entity.rotations[i];
             rotation.x += rotation.speed;
             rotation.y += rotation.speed;
