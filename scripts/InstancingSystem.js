@@ -5,17 +5,9 @@ class InstancingSystem extends System {
     constructor() {
         super();
 
-        console.log(this.componentName);
-
         this.instanceCount = 5;
-
-        // DataOrientedDesign arrays
-        this.positions = null;
-        this.scales = null;
-        this.rotations = null;
-        this.meshes = [];
-        this.geometry = null;
-        console.log('constructed an instancing system');
+        this.transformations = [];
+        this.instancedMesh = null;
     }
 
     update(deltaTime, frame) {
@@ -32,25 +24,8 @@ class InstancingSystem extends System {
     }
 
     attachedComponent(entity) {
-        console.log('in attachedComponent');
-        console.log('entity is:');
-        console.log(entity);
+        // ----- createInstancesInformation -----
 
-        this.createInstances();
-        console.log(entity.object3D);
-        console.log('hi4 - (entity.object3D.children)[0]');
-        let hi = entity.object3D.children;
-        console.log(hi);
-        console.log(hi.)
-        console.log(hi[0]);
-        console.log('hi5 - geometry grab based on isGroup');
-        let geometry = entity.object3D.isGroup ? (entity.object3D.children)[0] : entity.object3D;
-        addToScene(geometry);
-        console.log(entity);
-        console.log('done with attachedComponent');
-    }
-
-    createInstances() {
         // Create buffers for positions, scales, and rotations of instances
         this.positions = new Float32Array(this.instanceCount * 3);
         this.scales = new Float32Array(this.instanceCount * 3);
@@ -65,12 +40,12 @@ class InstancingSystem extends System {
             this.positions[i * 3 + 1] = y;
             this.positions[i * 3 + 2] = z;
 
-            const scale = Math.random() * 2.0; // Random scale between 0 and 2
+            const scale = Math.random() * 2.0;
             this.scales[i * 3] = scale;
             this.scales[i * 3 + 1] = scale;
             this.scales[i * 3 + 2] = scale;
 
-            const rotationSpeed = Math.random() * 0.05 + 0.02; // Random rotation speed
+            const rotationSpeed = Math.random() * 0.05 + 0.02;
             this.rotations[i] = {
                 x: Math.random() * Math.PI * 2.0,
                 y: Math.random() * Math.PI * 2.0,
@@ -78,26 +53,49 @@ class InstancingSystem extends System {
                 speed: rotationSpeed,
             };
         }
-    }
+        
+        // ----- addToScene(instancedMesh) -----
 
-    addToScene(geometry) {
-        const instancedGeometry = new THREE.InstancedBufferGeometry();
-        instancedGeometry.copy(geometry);
+        let originalMesh = entity.object3D;
+        let combinedGeometry = new THREE.BufferGeometry();
 
-        instancedGeometry.setAttribute('instancePosition', new THREE.InstancedBufferAttribute(positions, 3));
-        instancedGeometry.setAttribute('instanceScale', new THREE.InstancedBufferAttribute(scales, 3));
-
-        const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-
-        const matrix = new THREE.Matrix4();
-
-        for (let i = 0; i < this.instanceCount; i++) {
-            const mesh = new THREE.Mesh(instancedGeometry, material);
-            mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-            this.meshes.push(mesh);
-            // todo - will i be able to update these in the animate loop after?
-            entity.object3D.add(mesh);
+        // grab usable mesh
+        if (originalMesh instanceof THREE.Mesh) {
+            combinedGeometry = originalMesh.geometry.clone();
+        } else if (originalMesh instanceof THREE.Group) {
+            originalMesh.traverse(child => {
+                if (child instanceof THREE.Mesh) {
+                    const geometry = child.geometry.clone();
+                    geometry.applyMatrix4(child.matrixWorld); // Apply the child's world matrix
+                    combinedGeometry.merge(geometry);
+                }
+            });
         }
+
+        // Setup for the to-be-used instance
+        const instancedGeometry = new THREE.InstancedBufferGeometry();
+        instancedGeometry.copy(combinedGeometry);
+        for (let i = 0; i < this.instanceCount; ++i) {
+            const matrix = new THREE.Matrix4();
+            matrix.makeTranslation(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+
+            this.transformations.push(matrix);
+        }
+
+        // Create an InstancedMesh using the instanced geometry and matrices
+        const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+        const instancedMesh = new THREE.InstancedMesh(instancedGeometry, material, this.instanceCount);
+        instancedMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+
+        // Set matrices for instances
+        for (let i = 0; i < this.instanceCount; ++i) {
+            instancedMesh.setMatrixAt(i, this.transformations[i]);
+        }
+        instancedMesh.instanceMatrix.needsUpdate = true;
+        this.instancedMesh = instancedMesh;
+
+        // Add the instanced mesh to the scene
+        entity.object3D.add(instancedMesh);
     }
 
     updatedComponent(entity) {
@@ -109,23 +107,13 @@ class InstancingSystem extends System {
     }
 
     animate = (entity) => {
-        console.log('inside the animate function');
-        // todo - how to let one entity have more than one object3D in it??
-        // i have my list of meshes - go from there? or are they not linked as references - to resolve
+        // update mesh for each instance
         for (let i = 0; i < this.instanceCount; ++i) {
-            const rotation = entity.rotations[i];
-            rotation.x += rotation.speed;
-            rotation.y += rotation.speed;
-            rotation.z += rotation.speed;
+            const matrix = new THREE.Matrix4();
+            matrix.makeTranslation(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
 
-            matrix.identity()
-                .makeRotationX(rotation.x)
-                .makeRotationY(rotation.y)
-                .makeRotationZ(rotation.z);
-
-            // todo - does these update in the animate loop properly? or will i have to do a reload of the meshes
-            // based on object3D?
-            entity.meshes[i].instanceMatrix.multiplyMatrices(matrix, meshes[i].matrix);
+            this.transformations[i].copy(matrix);
+            this.instancedMesh.setMatrixAt(i, this.transformations[i]);
         }
     }
 }
