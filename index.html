@@ -72,7 +72,7 @@
 
         .mainContainer {
             background-color: white;
-            opacity: 1;
+            /* opacity: 1; */
             border-radius: 20px;
             height: 500px;
             width: 80vw;
@@ -192,18 +192,9 @@
 
 <body>
     <video id="background" src="/images/coffee_shop.mp4" playsinline="" autoplay="" muted="" loop=""></video>
-    <mr-app debug="true" camera="camera: perspective">
+    <mr-app debug="false" camera="camera: perspective">
         <mr-surface fixed="true">
-            <!-- <mr-entity rotation="90 0 0" comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;">
-                <mr-model class="daffodil" height="0.1" position="1 0 0"
-                    comp-animation="type: rotate; maxspeed: -0.002; acceleration: -0.000008;"
-                    src="./assets/daffodil_flower.glb" rotation="0 180 0">
-                </mr-model>
-            </mr-entity> -->
-
-            <!-- <mr-container class="mainContainer" rotation="-20 0 0" position="0 -0.1 0"> -->
             <mr-container class="mainContainer">
-
                 <mr-column class="mainColumn">
                     <mr-text class="title">I Wandered
                         Lonely as a Cloud</mr-text>
@@ -281,9 +272,9 @@
             </mr-container>
 
             <!-- <mr-container data-position="-0.2 0 0.1" class="toolbar" data-rotation="-20 0 0"> -->
-            <mr-container class="toolbar" data-position="0 0.5 0.1">
+            <!-- <mr-container class="toolbar" data-position="0 0.5 0.1">
                 <mr-text id="debug">0</mr-text>
-            </mr-container>
+            </mr-container> -->
 
             <mr-light color="white" intensity="1" data-position="0 1 0.5"></mr-light>
 
@@ -296,7 +287,7 @@
 
         <mr-light color="white" intensity="1" data-position="0 0 1"></mr-light>
 
-        <mr-model id="island" data-position="0 -1.5 -1" src="./assets/island3.glb" data-rotation="0 90 0">
+        <mr-model id="island" data-position="0 -1.25 -1" src="./assets/island.glb" data-rotation="0 90 0">
             <mr-light color="white" intensity="3" data-position="2 2 2"></mr-light>
         </mr-model>
 
@@ -372,21 +363,13 @@
     const skybox3 = document.querySelector("#sky3");
     const container = document.querySelector("mr-container");
     const island = document.querySelector("#island");
-    const debug = document.querySelector("#debug");
-
-    island.traverse(obj => {
-        if (obj.isMesh) {
-            obj.material.transparent = true;
-            obj.material.opacity = 0
-        }
-    })
+    // const debug = document.querySelector("#debug");
 
     const update = (event) => {
         const position = container.shuttle.position.y
 
         island.object3D.position.z = 0.5 * position - 1;
-        island.object3D.rotation.y = -0.25 * position + 90;
-        island.traverse(obj => { if (obj.isMesh) { obj.material.opacity = position } })
+        island.object3D.rotation.y = -0.5 * position + 90;
 
         skybox0.object3D.rotation.y = 0.25 * position + 90;
         skybox1.object3D.rotation.y = 0.25 * position + 90;
@@ -420,7 +403,7 @@
             skybox3.setOpacity(0);
         }
 
-        debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
+        // debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
     }
 
     document.addEventListener("DOMContentLoaded", (event) => {
