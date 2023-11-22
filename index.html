@@ -271,10 +271,9 @@
 
             </mr-container>
 
-            <!-- <mr-container data-position="-0.2 0 0.1" class="toolbar" data-rotation="-20 0 0"> -->
-            <!-- <mr-container class="toolbar" data-position="0 0.5 0.1">
+            <mr-container class="toolbar" data-position="0 0.5 0.1">
                 <mr-text id="debug">0</mr-text>
-            </mr-container> -->
+            </mr-container>
 
             <mr-light color="white" intensity="1" data-position="0 1 0.5"></mr-light>
 
@@ -287,7 +286,7 @@
 
         <mr-light color="white" intensity="1" data-position="0 0 1"></mr-light>
 
-        <mr-model id="island" data-position="0 -1.25 -1" src="./assets/island.glb" data-rotation="0 90 0">
+        <mr-model id="island" data-position="0 -1.25 -1" src="./assets/island.glb" data-rotation="0 0 0">
             <mr-light color="white" intensity="3" data-position="2 2 2"></mr-light>
         </mr-model>
 
@@ -363,7 +362,7 @@
     const skybox3 = document.querySelector("#sky3");
     const container = document.querySelector("mr-container");
     const island = document.querySelector("#island");
-    // const debug = document.querySelector("#debug");
+    const debug = document.querySelector("#debug");
 
     const update = (event) => {
         const position = container.shuttle.position.y
@@ -403,7 +402,7 @@
             skybox3.setOpacity(0);
         }
 
-        // debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
+        debug.innerText = Math.round(container.shuttle.position.y * 100) / 100;
     }
 
     document.addEventListener("DOMContentLoaded", (event) => {
