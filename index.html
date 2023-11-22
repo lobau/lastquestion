@@ -301,7 +301,7 @@
 
             const textureLoader = new THREE.TextureLoader();
             this.texture = textureLoader.load(this.dataset.texture);
-            this.material = new THREE.MeshBasicMaterial({
+            this.material = new THREE.MeshStandardMaterial({
                 color: 0xdddddd,
                 opacity: 0,
                 side: 1,
