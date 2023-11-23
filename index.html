@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>I Wandered Lonely as a Cloud</title>
 
-    <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/mr.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/volumetrics-io/mrjs@latest/dist/mr.js"></script> -->
+    <script src="./library/mr.js"></script>
     <style>
         @font-face {
             font-family: 'Hepta Slab';
@@ -74,7 +75,7 @@
             background-color: white;
             /* opacity: 1; */
             border-radius: 20px;
-            height: 500px;
+            height: 600px;
             width: 80vw;
         }
 
@@ -281,7 +282,7 @@
 
         <mr-sky id="sky0" data-texture="./skybox/black.jpg"></mr-sky>
         <mr-sky id="sky1" data-texture="./skybox/skydome01.jpg"></mr-sky>
-        <mr-sky id="sky2" data-texture="./skybox/skydome02.jpg"></mr-sky>
+        <mr-sky id="sky2" data-texture="./skybox/starmap_8k.jpg"></mr-sky>
         <mr-sky id="sky3" data-texture="./skybox/skybox2.jpg"></mr-sky>
 
         <mr-light color="white" intensity="1" data-position="0 0 1"></mr-light>
@@ -388,13 +389,13 @@
             skybox2.setOpacity(0);
             skybox3.setOpacity(0);
             island.object3D.visible = true;
-        } else if (container.shuttle.position.y < 0.8) {
+        } else if (container.shuttle.position.y < 0.6) {
             skybox0.setOpacity(0.5);
             skybox1.setOpacity(1);
             skybox2.setOpacity(0);
             skybox3.setOpacity(0);
             island.object3D.visible = true;
-        } else if (container.shuttle.position.y < 1.7) {
+        } else if (container.shuttle.position.y < 1.4) {
             skybox0.setOpacity(0.5);
             skybox1.setOpacity(1);
             skybox2.setOpacity(1);
